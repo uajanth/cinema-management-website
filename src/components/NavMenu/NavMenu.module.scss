@@ -53,3 +53,15 @@ $link-color: #007dd8;
 		}
 	}
 }
+
+@media screen and (min-width: base.$breakpoint_tablet) {
+	.container {
+		justify-content: flex-end;
+		gap: 2rem;
+
+		.link {
+			flex-direction: row;
+			gap: 0.1rem;
+		}
+	}
+}
