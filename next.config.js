@@ -5,6 +5,12 @@ const nextConfig = {
 	images: {
 		domains: ["imdb-api.com", "drive.google.com"],
 	},
+	sassOptions: {
+		includePaths: [
+			path.join(__dirname, "styles"),
+			path.join(__dirname, "components/*"),
+		],
+	},
 };
 
 module.exports = nextConfig;
