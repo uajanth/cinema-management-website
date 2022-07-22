@@ -53,12 +53,17 @@ $link-color: #007dd8;
 			display: block;
 		}
 	}
+
+	// .link:last-of-type {
+	// 	background-color: red;
+	// }
 }
 
 @media screen and (min-width: base.$breakpoint_tablet) {
 	.container {
 		justify-content: flex-end;
 		gap: 2rem;
+		padding-right: 1rem;
 
 		.link {
 			flex-direction: row;
