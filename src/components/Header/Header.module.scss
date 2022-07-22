@@ -1,0 +1,26 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	display: flex;
+
+	.marker {
+		width: "10px";
+	}
+}
+
+.header {
+	display: flex;
+
+	.header-title {
+		background-color: #181818;
+		color: white;
+		padding: 1rem;
+		border-top-right-radius: 0.4rem;
+		width: 100%;
+
+		// Flexbox
+		display: flex;
+		flex-direction: row;
+	}
+}
