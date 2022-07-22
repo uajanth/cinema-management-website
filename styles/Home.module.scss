@@ -1,0 +1,6 @@
+@use "base";
+
+.container {
+	width: base.$container-width;
+	max-width: base.$container-maxWidth;
+}
