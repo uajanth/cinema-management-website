@@ -4,6 +4,7 @@
 	background-color: rgb(255, 255, 255);
 	width: base.$container-width;
 	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
 	height: 420px;
 	padding: 1rem;
 	display: flex;
