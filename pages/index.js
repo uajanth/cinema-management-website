@@ -4,6 +4,7 @@ import Image from "next/image";
 import LogoBar from "../src/components/LogoBar";
 import NavMenu from "../src/components/NavMenu";
 import Carousel from "../src/components/Carousel";
+import ShowtimeContainer from "../src/containers/ShowtimesContainer";
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 				<LogoBar />
 				<NavMenu />
 				<Carousel />
+				<ShowtimeContainer />
 			</main>
 
 			{/* <footer className={styles.footer}>
