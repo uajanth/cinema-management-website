@@ -1,0 +1,67 @@
+@use "styles/base";
+
+$link-svg: 20px;
+$link-color: #007dd8;
+
+.container {
+	width: base.$container-width;
+	max-width: base.$container-maxWidth;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	.link {
+		color: #ffffff;
+		font-weight: 300;
+		font-size: 0.7rem;
+		text-decoration: none;
+		text-transform: uppercase;
+
+		// Flexbox
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.icon {
+			width: $link-svg;
+			height: $link-svg;
+			margin-bottom: 0.4rem;
+		}
+
+		.icon2 {
+			display: none;
+			width: $link-svg;
+			height: $link-svg;
+			margin-bottom: 0.4rem;
+		}
+	}
+
+	.link:hover {
+		cursor: pointer;
+		color: $link-color;
+		font-weight: 300;
+		font-size: 0.7rem;
+
+		.icon {
+			display: none;
+		}
+
+		.icon2 {
+			display: block;
+		}
+	}
+}
+
+@media screen and (min-width: base.$breakpoint_tablet) {
+	.container {
+		justify-content: flex-end;
+		gap: 2rem;
+
+		.link {
+			flex-direction: row;
+			gap: 0.1rem;
+		}
+	}
+}
