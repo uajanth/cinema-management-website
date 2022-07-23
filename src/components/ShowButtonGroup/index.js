@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import seatIcon from "../../../public/assets/seat-icon.svg";
-import styles from "./ShowtimeButton.module.scss";
+import styles from "./ShowButtonGroup.module.scss";
 
 export default function ShowButtonGroup({
 	time,
