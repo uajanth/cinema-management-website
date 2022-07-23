@@ -1,0 +1,23 @@
+@use "styles/base";
+
+.container {
+	background-color: base.$white-background1;
+	color: black;
+	width: 100%;
+	padding: 1rem;
+
+	h3 {
+		margin: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	select {
+		border: 2px solid rgb(60, 60, 60);
+		border-radius: 0.2rem;
+		padding: 0.4rem;
+		min-width: 120px;
+		width: 50%;
+		max-width: 295px;
+		font-size: 0.9rem;
+	}
+}
