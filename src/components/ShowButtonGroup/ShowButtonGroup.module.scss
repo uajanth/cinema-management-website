@@ -1,0 +1,65 @@
+$button-padding: 0.4rem;
+$button-corner-radius: 0.3rem;
+
+.container {
+	// Flexbox
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.15rem;
+
+	.time {
+		border: none;
+		border-top-left-radius: $button-corner-radius;
+		border-bottom-left-radius: $button-corner-radius;
+		background-color: #023d94;
+		color: #ffffff;
+		padding: $button-padding;
+		font-weight: 600;
+		min-width: 80px;
+	}
+
+	.time:hover {
+		cursor: pointer;
+		background-color: black;
+	}
+
+	.seat {
+		border: none;
+		border-top-right-radius: $button-corner-radius;
+		border-bottom-right-radius: $button-corner-radius;
+		background-color: #023d94;
+		padding: $button-padding;
+	}
+
+	.seat:hover {
+		cursor: pointer;
+		background-color: black;
+	}
+
+	.disabled-time {
+		border: none;
+		border-top-left-radius: $button-corner-radius;
+		border-bottom-left-radius: $button-corner-radius;
+		background-color: #b2b2b2;
+		color: white;
+		padding: $button-padding;
+		font-weight: 600;
+		min-width: 80px;
+	}
+
+	.disabled-time:hover {
+		cursor: not-allowed;
+	}
+
+	.disabled-seat {
+		border: none;
+		border-top-right-radius: $button-corner-radius;
+		border-bottom-right-radius: $button-corner-radius;
+		background-color: #b2b2b2;
+		padding: $button-padding;
+	}
+
+	.disabled-seat:hover {
+		cursor: not-allowed;
+	}
+}
