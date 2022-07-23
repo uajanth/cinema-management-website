@@ -1,0 +1,16 @@
+@use "styles/base";
+
+.container {
+	background-color: base.$secondary-color;
+	color: white;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.2rem;
+	display: inline-block;
+	margin-bottom: 0.5rem;
+
+	p {
+		margin: 0;
+		font-size: 0.6rem;
+		text-transform: uppercase;
+	}
+}
