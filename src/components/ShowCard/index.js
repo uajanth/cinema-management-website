@@ -1,6 +1,8 @@
 import styles from "./ShowCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import LanguageTag from "../LanguageTag";
+import ShowButtonGroup from "../ShowButtonGroup";
 import { IoPlayCircle } from "react-icons/io5";
 
 export default function ShowCard({
@@ -55,7 +57,17 @@ export default function ShowCard({
 						</a>
 					</Link>
 				</div>
-				<div className={styles.language}>Language(s)</div>
+				<div className={styles.language}>
+					<div>
+						<LanguageTag language="Tamil" />
+						<ShowButtonGroup
+							time="12:00 PM"
+							showId="1"
+							disable={false}
+							onPreviewSeats
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
