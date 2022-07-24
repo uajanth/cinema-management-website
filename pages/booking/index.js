@@ -3,6 +3,7 @@ import { IoExitOutline, IoExit } from "react-icons/io5";
 import styles from "../../styles/Booking.module.scss";
 import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
+import ShowDetails from "../../src/components/ShowDetails";
 
 export default function Booking({ showDetails, session }) {
 	const router = useRouter();
@@ -31,7 +32,7 @@ export default function Booking({ showDetails, session }) {
 					</a>
 				</div>
 				<div className={styles.content}>
-					<h1>Hello world</h1>
+					<ShowDetails />
 				</div>
 			</main>
 		</div>

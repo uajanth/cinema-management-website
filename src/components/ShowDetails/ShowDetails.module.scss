@@ -1,0 +1,56 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	min-width: base.$container-minWidth;
+	padding: 1rem;
+	color: black;
+
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+
+	.col-1 {
+		.poster {
+			background-color: black;
+			width: 170px;
+			height: 255px;
+		}
+	}
+	.col-2 {
+		.heading {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			gap: 0.25rem;
+			margin-bottom: 0.4rem;
+
+			h2 {
+				margin: 0;
+			}
+			h3 {
+				font-weight: 500;
+				margin: 0;
+			}
+		}
+		.date {
+			text-transform: uppercase;
+		}
+
+		.time {
+			text-transform: uppercase;
+		}
+
+		.screen {
+			text-transform: uppercase;
+		}
+
+		.seats {
+			text-transform: uppercase;
+		}
+
+		.language {
+			text-transform: uppercase;
+		}
+	}
+}

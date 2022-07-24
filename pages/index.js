@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import styles from "../styles/Home.module.scss";
 import Head from "next/head";
-import Image from "next/image";
 import LogoBar from "../src/components/LogoBar";
 import NavMenu from "../src/components/NavMenu";
 import Modal from "../src/components/Modal";
