@@ -72,7 +72,18 @@
 			}
 		}
 
-		.language {
+		.languages {
+			.language {
+				margin-bottom: 0.5rem;
+			}
+			.shows {
+				max-width: 750px; // Need to adjust later based on mediaquery values
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 0.8rem;
+			}
 		}
 	}
 }
