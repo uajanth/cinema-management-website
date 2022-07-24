@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ShowtimeContainer.module.scss";
 import Header from "../../components/Header";
 import DateContainer from "../DateContainer";
 import ShowCard from "../../components/ShowCard";
+import { addDays, endOfDay, format, isPast } from "date-fns";
 
 export default function ShowtimeContainer() {
 	const [shows, setShows] = useState([]);
-	const [uniqueMovieIds, setUniqueMovieIds] = useState([]);
 	const [movies, setMovies] = useState([]);
+	const [error, setError] = useState({ state: false, message: "" });
+
+	useEffect(() => {
+		return setError({ state: false, message: "" });
+	}, []);
 
 	const fetchShowsForDate = async (date) => {
 		try {
@@ -41,7 +46,6 @@ export default function ShowtimeContainer() {
 		shows.forEach((show) => movies.push(show.movie));
 		// Filter all movies for unique movies
 		const uniqueMoviesById = await createUniqueMovieArray(movies);
-		setUniqueMovieIds(uniqueMoviesById);
 		return uniqueMoviesById;
 	};
 
@@ -62,17 +66,30 @@ export default function ShowtimeContainer() {
 		}
 	};
 
+	const fetchShows = async (date) => {
+		// If the date has past then reset states of shows and movies and return an error
+		if (isPast(addDays(endOfDay(new Date(date)), 1))) {
+			setError({ state: true, message: "Invalid date." });
+			setShows([]);
+			setMovies([]);
+			return "Invalid Date";
+		}
+		const shows = await fetchShowsForDate(date);
+		const uniqueMoviesById = await filterShowsForUniqueMovies(shows);
+		const movies = await fetchMoviesForDate(uniqueMoviesById);
+		setMovies(movies);
+		return;
+	};
+
 	return (
 		<div className={styles.container}>
 			<Header text="Showtimes &amp; Tickets" color="#007DD8" />
 			<DateContainer
 				date={async (date) => {
-					const shows = await fetchShowsForDate(date);
-					const uniqueMoviesById = await filterShowsForUniqueMovies(shows);
-					const movies = await fetchMoviesForDate(uniqueMoviesById);
-					setMovies(movies);
+					return await fetchShows(date);
 				}}
 			/>
+			{error.state && <h2>{error.message}</h2>}
 			{movies?.length > 0 &&
 				movies.map((movie, index) => {
 					return (
