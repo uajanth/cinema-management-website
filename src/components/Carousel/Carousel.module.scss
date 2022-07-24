@@ -1,9 +1,10 @@
 @use "styles/base";
 
 .container {
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(29, 29, 29);
 	width: base.$container-width;
 	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
 	height: 420px;
 	padding: 1rem;
 	display: flex;

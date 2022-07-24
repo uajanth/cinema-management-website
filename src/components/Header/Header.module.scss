@@ -1,0 +1,19 @@
+@use "styles/base";
+
+.container {
+	padding-top: 1rem;
+	width: 100%;
+	height: fit-content;
+	display: flex;
+
+	.marker {
+		width: 10px;
+	}
+	.text {
+		background-color: #181818;
+		color: white;
+		padding: 1rem;
+		border-top-right-radius: 0.4rem;
+		width: 100%;
+	}
+}
