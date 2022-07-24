@@ -1,0 +1,61 @@
+@use "base";
+
+$link-svg: 20px;
+$link-color: #007dd8;
+
+.container {
+	width: base.$container-width;
+	max-width: base.$container-maxWidth;
+	.link-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+		.link {
+			color: #ffffff;
+			font-weight: 300;
+			font-size: 0.7rem;
+			text-decoration: none;
+			text-transform: uppercase;
+
+			// Flexbox
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			gap: 0.2rem;
+
+			.icon {
+				width: $link-svg;
+				height: $link-svg;
+				margin-right: 0.5rem;
+			}
+
+			.icon2 {
+				display: none;
+				width: $link-svg;
+				height: $link-svg;
+				margin-right: 0.5rem;
+			}
+		}
+
+		.link:hover {
+			cursor: pointer;
+			color: $link-color;
+			font-weight: 300;
+			font-size: 0.7rem;
+
+			.icon {
+				display: none;
+			}
+
+			.icon2 {
+				display: block;
+			}
+		}
+	}
+	.content {
+		background-color: white;
+		color: #000;
+	}
+}
