@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import styles from "./ShowCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { isPast, endOfDay, getTime, format } from "date-fns";
 import LanguageTag from "../LanguageTag";
 import ShowButtonGroup from "../ShowButtonGroup";
 import { IoPlayCircle } from "react-icons/io5";
@@ -17,13 +19,33 @@ export default function ShowCard({
 	posterLink,
 	showtimes,
 }) {
-	const containerColor = index % 2 === 0 ? "#EFEFEF" : "#FAFAFA";
+	const [showLanguages, setShowLanguages] = useState({});
+
+	useEffect(() => {
+		setShowLanguages(transformLanguage(language));
+	}, []);
+
+	const cardColor = index % 2 === 0 ? "#EFEFEF" : "#FAFAFA";
+
+	const transformLanguage = (language) => {
+		const movieLanguages = language.split(", ");
+		const showLanguages = showtimes.map((show) => show.language);
+		const playingLanguages = [];
+
+		movieLanguages.forEach((language) => {
+			if (
+				!playingLanguages.includes(language) &&
+				showLanguages.includes(language)
+			) {
+				playingLanguages.push(language);
+			}
+		});
+
+		return playingLanguages;
+	};
 
 	return (
-		<div
-			className={styles.container}
-			style={{ backgroundColor: containerColor }}
-		>
+		<div className={styles.container} style={{ backgroundColor: cardColor }}>
 			<div className={styles["col-1"]}>
 				<div className={styles.poster}>
 					{posterLink ? (
@@ -57,16 +79,46 @@ export default function ShowCard({
 						</a>
 					</Link>
 				</div>
-				<div className={styles.language}>
-					<div>
-						<LanguageTag language="Tamil" />
-						<ShowButtonGroup
-							time="12:00 PM"
-							showId="1"
-							disable={false}
-							onPreviewSeats
-						/>
-					</div>
+				<div className={styles.languages}>
+					{showLanguages.length > 0 &&
+						showLanguages.map((language, index) => {
+							return (
+								<div key={index} className={styles.language}>
+									<LanguageTag language={language} />
+									<div className={styles.shows}>
+										{showtimes
+											.filter((showtime) => showtime.language == language)
+											.sort((a, b) => (a.startTime >= b.startTime ? 1 : -1))
+											.map((show, index) => {
+												if (
+													getTime(
+														new Date(
+															`${format(new Date(show.date), "yyyy-MM-dd")} ${
+																show.startTime
+															}`
+														)
+													) < getTime(new Date())
+												) {
+													return (
+														<ShowButtonGroup
+															key={index}
+															time={show.startTime12}
+															disable={true}
+														/>
+													);
+												}
+												return (
+													<ShowButtonGroup
+														key={index}
+														showId={show._id}
+														time={show.startTime12}
+													/>
+												);
+											})}
+									</div>
+								</div>
+							);
+						})}
 				</div>
 			</div>
 		</div>
