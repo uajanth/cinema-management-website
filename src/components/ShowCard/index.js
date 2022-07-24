@@ -6,6 +6,8 @@ import { isPast, endOfDay, getTime, format } from "date-fns";
 import LanguageTag from "../LanguageTag";
 import ShowButtonGroup from "../ShowButtonGroup";
 import { IoPlayCircle } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../app/modalSlice";
 
 export default function ShowCard({
 	index,
@@ -24,6 +26,8 @@ export default function ShowCard({
 	useEffect(() => {
 		setShowLanguages(transformLanguage(language));
 	}, []);
+
+	const dispatch = useDispatch();
 
 	const cardColor = index % 2 === 0 ? "#EFEFEF" : "#FAFAFA";
 
@@ -73,7 +77,12 @@ export default function ShowCard({
 				</div>
 				<div className={styles.trailer}>
 					<Link href="/" passHref>
-						<a className={styles.link} onClick={() => {}}>
+						<a
+							className={styles.link}
+							onClick={() => {
+								dispatch(showModal({ type: "view-trailer" }));
+							}}
+						>
 							<IoPlayCircle fontSize="large" />
 							<h4>View Trailer</h4>
 						</a>
