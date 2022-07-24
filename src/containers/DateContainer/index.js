@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import styles from "./DateContainer.module.scss";
-import { isToday, format, addDays, formatISO, startOfToday } from "date-fns";
-import { zonedTimeToUtc } from "date-fns-tz";
+import { format, addDays, startOfToday } from "date-fns";
 
 export default function DateContainer({ date }) {
 	const [selectedDate, setSelectedDate] = useState(
-		startOfToday(),
-		"yyyy-MM-dd"
+		format(startOfToday(), "yyyy-MM-dd")
 	);
 
 	useEffect(() => {
-		date(format(selectedDate, "yyyy-MM-dd"));
+		date(selectedDate);
 	}, []);
 
 	const day0 = startOfToday();
