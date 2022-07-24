@@ -80,7 +80,12 @@ export default function ShowCard({
 						<a
 							className={styles.link}
 							onClick={() => {
-								dispatch(showModal({ type: "view-trailer" }));
+								dispatch(
+									showModal({
+										type: "view-trailer",
+										info: { title, trailerLink },
+									})
+								);
 							}}
 						>
 							<IoPlayCircle fontSize="large" />

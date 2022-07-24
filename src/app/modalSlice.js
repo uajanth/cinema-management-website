@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	isVisible: false,
 	type: "",
+	info: {},
 };
 
 export const modalSlice = createSlice({
@@ -12,10 +13,12 @@ export const modalSlice = createSlice({
 		showModal: (state, action) => {
 			state.isVisible = true;
 			state.type = action.payload.type;
+			state.info = action.payload.info;
 		},
 		hideModal: (state) => {
 			state.isVisible = false;
 			state.type = "";
+			state.info = {};
 		},
 	},
 });

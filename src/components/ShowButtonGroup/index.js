@@ -2,14 +2,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import seatIcon from "../../../public/assets/seat-icon.svg";
 import styles from "./ShowButtonGroup.module.scss";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../app/modalSlice";
 
-export default function ShowButtonGroup({
-	time,
-	showId,
-	disable,
-	onPreviewSeats,
-}) {
+export default function ShowButtonGroup({ time, showId, disable }) {
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	const startBookingForShow = (id) => {};
 
@@ -23,7 +21,12 @@ export default function ShowButtonGroup({
 			</button>
 			<button
 				className={!disable ? styles.seat : styles["disabled-seat"]}
-				onClick={!disable ? () => onPreviewSeats(showId) : () => {}}
+				onClick={
+					!disable
+						? () =>
+								dispatch(showModal({ type: "preview-seats", info: { showId } }))
+						: () => {}
+				}
 			>
 				<Image
 					src={seatIcon}
