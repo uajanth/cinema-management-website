@@ -6,8 +6,8 @@ import {
 	IoLocation,
 	IoSearchOutline,
 	IoSearch,
-	IoExitOutline,
-	IoExit,
+	IoCalendarOutline,
+	IoCalendar,
 } from "react-icons/io5";
 import Link from "next/link";
 
@@ -37,8 +37,8 @@ export default function NavMenu() {
 			</Link>
 			<Link id="upcoming" href="/upcoming" passHref>
 				<a className={styles.link}>
-					<IoExitOutline className={styles.icon} />
-					<IoExit className={styles.icon2} />
+					<IoCalendarOutline className={styles.icon} />
+					<IoCalendar className={styles.icon2} />
 					Upcoming
 				</a>
 			</Link>
