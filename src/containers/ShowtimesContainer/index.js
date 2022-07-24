@@ -3,7 +3,7 @@ import styles from "./ShowtimeContainer.module.scss";
 import Header from "../../components/Header";
 import DateContainer from "../DateContainer";
 import ShowCard from "../../components/ShowCard";
-import { addDays, endOfDay, format, isPast } from "date-fns";
+import { addDays, endOfDay, isPast } from "date-fns";
 
 export default function ShowtimeContainer() {
 	const [shows, setShows] = useState([]);

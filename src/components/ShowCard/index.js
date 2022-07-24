@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./ShowCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { isPast, endOfDay, getTime, format } from "date-fns";
+import { getTime, format } from "date-fns";
 import LanguageTag from "../LanguageTag";
 import ShowButtonGroup from "../ShowButtonGroup";
 import { IoPlayCircle } from "react-icons/io5";
