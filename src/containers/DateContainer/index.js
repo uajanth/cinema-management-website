@@ -35,10 +35,10 @@ export default function DateContainer({ date }) {
 					{/* Check every value in select menu if it is in the past using datefns */}
 					{/* Return an error if it is in the past */}
 					<option value={formatDateValue(day0)}>Today</option>
-					<option value={formatDateValue(day1)}>{format(day1, "PPP")}</option>
-					<option value={formatDateValue(day2)}>{format(day2, "PPP")}</option>
-					<option value={formatDateValue(day3)}>{format(day3, "PPP")}</option>
-					<option value={formatDateValue(day4)}>{format(day4, "PPP")}</option>
+					<option value={formatDateValue(day1)}>{format(day1, "PPPP")}</option>
+					<option value={formatDateValue(day2)}>{format(day2, "PPPP")}</option>
+					<option value={formatDateValue(day3)}>{format(day3, "PPPP")}</option>
+					<option value={formatDateValue(day4)}>{format(day4, "PPPP")}</option>
 				</select>
 			</form>
 		</div>
