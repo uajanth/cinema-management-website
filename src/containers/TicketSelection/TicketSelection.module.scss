@@ -41,6 +41,11 @@
 	.proceed:hover {
 		cursor: pointer;
 	}
+
+	.disabled {
+		background-color: #c3c3c3;
+		cursor: not-allowed !important;
+	}
 }
 
 @media only screen and (min-width: 900px) {

@@ -1,27 +1,74 @@
 import styles from "./TicketSelection.module.scss";
 import TicketItem from "../../components/TicketItem";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
-export default function TicketSelection() {
+export default function TicketSelection({ session, onProceed }) {
+	const router = useRouter();
+	const sessionId = router.query.sessionId;
+
+	// Payment processor sets this value
 	const BOOKINGFEE = 1.2;
-	const TICKETSDB = [
-		{ price: 15, name: "General" },
-		{ price: 10, name: "Child" },
-		{ price: 10, name: "Senior" },
-	];
 
-	const totalTickets = 1;
+	// Redux Ticket State
+	const totalTickets = useSelector((state) => state.ticket.totalTickets);
+	const TICKETSDB = useSelector((state) => state.ticket.ticketsByGroup);
+	const ticketState = useSelector((state) => state.ticket);
+
+	// Subtotal
+	const bookingSubtotal = BOOKINGFEE * totalTickets;
+	const ticketSubtotal = TICKETSDB.reduce((acc, group) => {
+		return acc + group.price * group.quantity;
+	}, 0);
+
+	const subtotal = (bookingSubtotal + ticketSubtotal).toFixed(2);
+
+	const proceedHandler = async (state) => {
+		if (state.totalTickets > 0) {
+			const jsonTicketsByGroup = JSON.stringify(state.ticketsByGroup);
+			try {
+				const response = await fetch(`http://localhost:3000/sessions/id`, {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						id: sessionId,
+						totalTickets,
+						ticketsByGroup: jsonTicketsByGroup,
+						seatsSelected: "false",
+						checkoutStep: "2",
+					}),
+				});
+				console.log(response);
+				if (response.ok) {
+					const data = await response.json();
+					onProceed();
+					console.log("Updated session!");
+					return;
+				}
+				throw new Error();
+			} catch (error) {
+				console.log(error);
+				return;
+			}
+		}
+	};
 
 	return (
 		<div className={styles.container}>
 			<h1>Standard Tickets</h1>
 			{TICKETSDB.map((ticket, index) => {
 				return (
-					<TicketItem key={index} price={ticket.price} name={ticket.name} />
+					<TicketItem
+						key={index}
+						price={ticket.price}
+						name={ticket.name}
+						quantity={ticket.quantity}
+					/>
 				);
 			})}
 			<div className={styles["line-container"]}>
 				<p className={styles["line-heading"]}>Booking Fee</p>
-				<p>{`$${(BOOKINGFEE * totalTickets).toFixed(2)}`}</p>
+				<p>{`$${bookingSubtotal.toFixed(2)}`}</p>
 			</div>
 			<div className={styles["line-container"]}>
 				<div>
@@ -31,10 +78,20 @@ export default function TicketSelection() {
 					</p>
 				</div>
 				<div>
-					<p>$0.00</p>
+					<p>{`$${subtotal}`}</p>
 				</div>
 			</div>
-			<button className={styles.proceed}>Proceed</button>
+			<button
+				disabled={totalTickets == 0 ? true : false}
+				className={
+					totalTickets > 0
+						? `${styles.proceed}`
+						: `${styles.proceed} ${styles.disabled}`
+				}
+				onClick={() => proceedHandler(ticketState)}
+			>
+				Proceed
+			</button>
 		</div>
 	);
 }

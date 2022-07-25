@@ -58,7 +58,6 @@ export default function Home() {
 		  )
 		: null;
 
-	console.log(modalState);
 	return (
 		<div>
 			<Head>

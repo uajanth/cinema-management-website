@@ -27,7 +27,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 
 		.add-button {
 			width: 100%;
@@ -44,21 +43,19 @@
 		}
 
 		.secondary-button-container {
-			width: 50%;
-			padding: 1rem;
+			width: 100%;
 			// Flexbox
 			display: flex;
-			justify-content: center;
+			justify-content: space-between;
 			align-items: center;
-			gap: 3rem;
 
 			.secondary-button {
 				background-color: #274eda;
 				color: white;
 				font-weight: 400;
-				font-size: 1.5rem;
+				font-size: 1.25rem;
 				border: none;
-				padding: 0 0.5rem 0.1rem 0.5rem;
+				padding: 0.4rem 0.8rem 0.4rem 0.8rem;
 			}
 
 			.secondary-button:hover {
@@ -66,7 +63,8 @@
 			}
 
 			.tickets {
-				font-size: 1.2rem;
+				font-size: 1.5rem;
+				font-weight: 700;
 			}
 		}
 	}
