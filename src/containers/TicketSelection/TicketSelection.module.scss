@@ -1,0 +1,50 @@
+@use "styles/base";
+
+.container {
+	width: 50%;
+	min-width: base.$container-minWidth;
+	display: flex;
+	flex-direction: column;
+
+	h1 {
+		margin: 0;
+	}
+
+	.line-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.line-heading {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		font-weight: 600;
+		margin: 0;
+	}
+	.line-subheading {
+		margin: 0;
+		font-size: 0.8rem;
+	}
+
+	.proceed {
+		width: 100%;
+		background-color: #274eda;
+		border: none;
+		padding: 1rem;
+		color: white;
+		font-weight: 500;
+		text-transform: uppercase;
+	}
+
+	.proceed:hover {
+		cursor: pointer;
+	}
+}
+
+@media only screen and (min-width: 900px) {
+	.container {
+		margin-top: -0.5rem;
+	}
+}

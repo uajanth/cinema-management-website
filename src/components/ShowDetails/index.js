@@ -52,7 +52,7 @@ export default function ShowDetails({
 				</div>
 				<div className={styles.seats}>
 					<h5>Seats</h5>
-					<h4>{seats}</h4>
+					<h4>{seats ? seats : "NA"}</h4>
 				</div>
 			</div>
 		</div>

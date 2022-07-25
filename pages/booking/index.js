@@ -5,6 +5,7 @@ import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
 import CheckoutProgress from "../../src/components/CheckoutProgress";
 import ShowDetails from "../../src/components/ShowDetails";
+import TicketSelection from "../../src/containers/TicketSelection";
 
 export default function Booking({ session, show, movie }) {
 	console.log("session", session);
@@ -39,6 +40,8 @@ export default function Booking({ session, show, movie }) {
 					<div className={styles.content}>
 						<div className={styles["col-1"]}>
 							<CheckoutProgress step={session.checkoutStep} />
+						</div>
+						<div className={styles["col-2"]}>
 							<ShowDetails
 								show={show}
 								posterLink={movie.posterLink}
@@ -51,8 +54,8 @@ export default function Booking({ session, show, movie }) {
 								seats={session.seats}
 								language={show.language}
 							/>
+							{session.checkoutStep == 1 && <TicketSelection />}
 						</div>
-						<div className={styles["col-2"]}></div>
 					</div>
 				)}
 			</main>
