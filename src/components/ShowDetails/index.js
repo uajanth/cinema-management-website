@@ -1,22 +1,24 @@
 import styles from "./ShowDetails.module.scss";
 import Image from "next/image";
+import format from "date-fns/format";
 
 export default function ShowDetails({
 	show,
+	posterLink,
 	title,
-	date,
-	seats,
-	language,
-	theatre,
 	rating,
 	runtime,
-	startTime12,
+	date,
+	startTime,
+	theatre,
+	seats,
+	language,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles["col-1"]}>
 				<div className={styles.poster}>
-					{/* {posterLink ? (
+					{posterLink ? (
 						<Image
 							src={posterLink}
 							alt={title}
@@ -25,30 +27,32 @@ export default function ShowDetails({
 							height="255px"
 							priority
 						/>
-					) : null} */}
+					) : null}
 				</div>
 			</div>
 			<div className={styles["col-2"]}>
 				<div className={styles.heading}>
-					<h2>{title ? title : "Movie Title"}</h2>
-					<h3
-						className={styles["movie-details"]}
-					>{`${rating} | ${runtime}`}</h3>
+					<h2>{`${title} (${rating})`}</h2>
 				</div>
 				<div className={styles.date}>
-					<h5>{date ? date : "Date"}</h5>
+					<h5>Date</h5>
+					<h4>{format(new Date(date), "PPPP")}</h4>
 				</div>
 				<div className={styles.time}>
-					<h5>{startTime12 ? startTime12 : "Time"}</h5>
+					<h5>Time</h5>
+					<h4>{startTime}</h4>
 				</div>
 				<div className={styles.screen}>
-					<h5>{theatre ? theatre : "Screen"}</h5>
-				</div>
-				<div className={styles.seats}>
-					<h5>{seats ? seats : "Seats"}</h5>
+					<h5>Screen</h5>
+					<h4>{theatre}</h4>
 				</div>
 				<div className={styles.language}>
-					<h5>{language ? language : "Language"}</h5>
+					<h5>Language</h5>
+					<h4>{language}</h4>
+				</div>
+				<div className={styles.seats}>
+					<h5>Seats</h5>
+					<h4>{seats}</h4>
 				</div>
 			</div>
 		</div>

@@ -9,7 +9,30 @@ export default function ShowButtonGroup({ time, showId, disable }) {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
-	const startBookingForShow = (id) => {};
+	const createNewSession = async (id) => {
+		try {
+			const response = await fetch(`http://localhost:3000/sessions`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ showId: id }),
+			});
+
+			if (response.ok) {
+				const session = await response.json();
+				return session;
+			}
+			throw new Error();
+		} catch (error) {
+			console.log(error);
+			return;
+		}
+	};
+
+	const startBookingForShow = async (id) => {
+		const session = await createNewSession(id);
+		console.log(session);
+		router.push(`/booking?sessionId=${session.id}`);
+	};
 
 	return (
 		<div className={styles.container}>

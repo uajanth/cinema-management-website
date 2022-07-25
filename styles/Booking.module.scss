@@ -4,8 +4,10 @@ $link-svg: 20px;
 $link-color: #007dd8;
 
 .container {
+	min-width: base.$container-minWidth;
 	width: base.$container-width;
 	max-width: base.$container-maxWidth;
+
 	.link-container {
 		display: flex;
 		flex-direction: row;
@@ -55,7 +57,20 @@ $link-color: #007dd8;
 		}
 	}
 	.content {
+		width: 100%;
 		background-color: white;
 		color: #000;
+		display: flex;
+		flex-direction: row;
+
+		.col-1 {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.col-2 {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 }

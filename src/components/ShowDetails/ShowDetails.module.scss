@@ -23,6 +23,7 @@
 			flex-direction: column;
 			flex-wrap: wrap;
 			gap: 0.25rem;
+			text-transform: uppercase;
 			margin-bottom: 0.4rem;
 
 			h2 {
@@ -33,24 +34,53 @@
 				margin: 0;
 			}
 		}
+
 		.date {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.time {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.screen {
 			text-transform: uppercase;
-		}
+			margin-bottom: 0.5rem;
 
-		.seats {
-			text-transform: uppercase;
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.language {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
+		}
+		.seats {
+			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 	}
 }
