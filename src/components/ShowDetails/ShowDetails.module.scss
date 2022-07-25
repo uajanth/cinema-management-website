@@ -1,16 +1,17 @@
 @use "styles/base";
 
 .container {
-	width: 100%;
+	width: 50%;
 	min-width: base.$container-minWidth;
-	padding: 1rem;
 	color: black;
-
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	gap: 2rem;
+	margin-bottom: 2rem;
 
 	.col-1 {
+		width: 50%;
 		.poster {
 			background-color: black;
 			width: 170px;
@@ -18,11 +19,13 @@
 		}
 	}
 	.col-2 {
+		width: 50%;
 		.heading {
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
 			gap: 0.25rem;
+			text-transform: uppercase;
 			margin-bottom: 0.4rem;
 
 			h2 {
@@ -33,24 +36,70 @@
 				margin: 0;
 			}
 		}
+
 		.date {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.time {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.screen {
 			text-transform: uppercase;
-		}
+			margin-bottom: 0.5rem;
 
-		.seats {
-			text-transform: uppercase;
+			h4,
+			h5 {
+				margin: 0;
+			}
 		}
 
 		.language {
 			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
+		}
+		.seats {
+			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+
+			h4,
+			h5 {
+				margin: 0;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.container {
+		justify-content: flex-start;
+		gap: 1rem;
+		margin: 0;
+
+		.col-1 {
+			width: fit-content;
+			.poster {
+				background-color: black;
+				width: 170px;
+				height: 255px;
+			}
 		}
 	}
 }

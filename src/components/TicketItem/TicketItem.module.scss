@@ -1,0 +1,73 @@
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	.col-1 {
+		width: 50%;
+		min-width: 170px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 1rem 0rem;
+
+		.name {
+			margin: 0;
+			font-size: 1.25rem;
+		}
+		.price {
+			margin: 0;
+			letter-spacing: 0.05rem;
+			font-size: 1.1rem;
+		}
+	}
+
+	.col-2 {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.add-button {
+			width: 100%;
+			background-color: #274eda;
+			border: none;
+			padding: 1rem;
+			color: white;
+			font-weight: 500;
+			text-transform: uppercase;
+		}
+
+		.add-button:hover {
+			cursor: pointer;
+		}
+
+		.secondary-button-container {
+			width: 50%;
+			padding: 1rem;
+			// Flexbox
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 3rem;
+
+			.secondary-button {
+				background-color: #274eda;
+				color: white;
+				font-weight: 400;
+				font-size: 1.5rem;
+				border: none;
+				padding: 0 0.5rem 0.1rem 0.5rem;
+			}
+
+			.secondary-button:hover {
+				cursor: pointer;
+			}
+
+			.tickets {
+				font-size: 1.2rem;
+			}
+		}
+	}
+}

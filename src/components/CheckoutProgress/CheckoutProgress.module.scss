@@ -1,0 +1,27 @@
+.container {
+	margin-bottom: 1rem;
+	padding: 1rem;
+	width: 100%;
+}
+
+.step {
+	margin: 0;
+	font-size: 0.8rem;
+	color: rgb(79, 79, 79);
+	font-weight: 500;
+}
+
+.header {
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+.bar {
+	background-color: rgb(207, 207, 207);
+	width: 100%;
+
+	.fill {
+		background-color: #274eda;
+		height: 5px;
+	}
+}
