@@ -6,13 +6,15 @@ import LogoBar from "../../src/components/LogoBar";
 import CheckoutProgress from "../../src/components/CheckoutProgress";
 import ShowDetails from "../../src/components/ShowDetails";
 import TicketSelection from "../../src/containers/TicketSelection";
+import Link from "next/link";
 
 export default function Booking({ session, show, movie }) {
-	console.log("session", session);
-	console.log("show", show);
-	console.log("movie", movie);
-
 	const router = useRouter();
+
+	const refreshData = () => {
+		router.replace(router.asPath);
+	};
+
 	const exitSessionHandler = () => {
 		router.push("/");
 	};
@@ -30,11 +32,13 @@ export default function Booking({ session, show, movie }) {
 			<main className={styles.container}>
 				<LogoBar />
 				<div className={styles["link-container"]}>
-					<a className={styles.link} onClick={exitSessionHandler}>
-						Exit
-						<IoExitOutline className={styles.icon} />
-						<IoExit className={styles.icon2} />
-					</a>
+					<Link href="/">
+						<a className={styles.link}>
+							Exit
+							<IoExitOutline className={styles.icon} />
+							<IoExit className={styles.icon2} />
+						</a>
+					</Link>
 				</div>
 				{session && (
 					<div className={styles.content}>
@@ -54,7 +58,9 @@ export default function Booking({ session, show, movie }) {
 								seats={session.seats}
 								language={show.language}
 							/>
-							{session.checkoutStep == 1 && <TicketSelection />}
+							{session.checkoutStep == 1 && (
+								<TicketSelection session={session} onProceed={refreshData} />
+							)}
 						</div>
 					</div>
 				)}
