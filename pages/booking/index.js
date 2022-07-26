@@ -58,6 +58,7 @@ export default function Booking({ session, show, movie }) {
 							{session.checkoutStep == 1 && (
 								<TicketSelection session={session} onProceed={refreshData} />
 							)}
+							{session.checkoutStep == 2 && <Theatre onProceed={refreshData} />}
 						</div>
 					</div>
 				)}

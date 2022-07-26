@@ -1,5 +1,6 @@
 import styles from "./SessionCounter.module.scss";
 import { useEffect, useState, memo } from "react";
+import { useRouter } from "next/router";
 
 function SessionCounter({ expiresAt }) {
 	const calculateTimeLeft = () => {
@@ -24,15 +25,19 @@ function SessionCounter({ expiresAt }) {
 		}, 1000);
 	}, [timeLeft]);
 
+	console.log(timeLeft);
+
 	return (
 		<div className={styles.container}>
 			<h3>Time Left</h3>
-			{/* watch for 0.00 on load */}
-			{timeLeft && timeLeft.seconds != 0 && (
-				<h2>{`${timeLeft?.minutes}:${timeLeft?.seconds < 10 ? "0" : ""}${
-					timeLeft?.seconds
-				}`}</h2>
-			)}
+			{difference > 0 &&
+				(timeLeft.hours > 0 ||
+					timeLeft.minutes > 0 ||
+					timeLeft.seconds > 0) && (
+					<h2>{`${timeLeft?.minutes}:${timeLeft?.seconds < 10 ? "0" : ""}${
+						timeLeft?.seconds
+					}`}</h2>
+				)}
 		</div>
 	);
 }
