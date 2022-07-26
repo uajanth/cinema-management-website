@@ -15,10 +15,6 @@ export default function Booking({ session, show, movie }) {
 		router.replace(router.asPath);
 	};
 
-	const exitSessionHandler = () => {
-		router.push("/");
-	};
-
 	return (
 		<div>
 			<Head>
@@ -57,6 +53,7 @@ export default function Booking({ session, show, movie }) {
 								theatre={show.theatre.theatre}
 								seats={session.seats}
 								language={show.language}
+								expiresAt={session.expiresAt}
 							/>
 							{session.checkoutStep == 1 && (
 								<TicketSelection session={session} onProceed={refreshData} />
