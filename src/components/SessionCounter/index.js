@@ -25,8 +25,6 @@ function SessionCounter({ expiresAt }) {
 		}, 1000);
 	}, [timeLeft]);
 
-	console.log(timeLeft);
-
 	return (
 		<div className={styles.container}>
 			<h3>Time Left</h3>

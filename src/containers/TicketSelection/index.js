@@ -3,12 +3,12 @@ import TicketItem from "../../components/TicketItem";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-export default function TicketSelection({ session, onProceed }) {
+export default function TicketSelection({ session, onProceed, fee }) {
 	const router = useRouter();
 	const sessionId = router.query.sessionId;
 
 	// Payment processor sets this value
-	const BOOKINGFEE = 1.2;
+	const BOOKINGFEE = fee;
 
 	// Redux Ticket State
 	const totalTickets = useSelector((state) => state.ticket.totalTickets);
@@ -42,7 +42,7 @@ export default function TicketSelection({ session, onProceed }) {
 				if (response.ok) {
 					const data = await response.json();
 					onProceed();
-					console.log("Updated session!");
+					console.log("Moving onto step 2!");
 					return;
 				}
 				throw new Error();
