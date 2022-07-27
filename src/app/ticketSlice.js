@@ -57,10 +57,19 @@ export const ticketSlice = createSlice({
 				}
 			}
 		},
+		resetTickets: (state) => {
+			console.log(1, state.totalTickets);
+			console.log(1, state.ticketsByGroup);
+
+			state.totalTickets = initialState.totalTickets;
+			state.ticketsByGroup = initialState.ticketsByGroup;
+			console.log(2, state.totalTickets);
+			console.log(2, state.ticketsByGroup);
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement } = ticketSlice.actions;
+export const { increment, decrement, resetTickets } = ticketSlice.actions;
 
 export default ticketSlice.reducer;

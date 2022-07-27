@@ -6,17 +6,18 @@ import LogoBar from "../../src/components/LogoBar";
 import CheckoutProgress from "../../src/components/CheckoutProgress";
 import ShowDetails from "../../src/components/ShowDetails";
 import TicketSelection from "../../src/containers/TicketSelection";
+import TheatreContainer from "../../src/containers/TheatreContainer";
+import OrderSummary from "../../src/containers/OrderSummary";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Booking({ session, show, movie }) {
+	const BOOKINGFEE = 1.2;
+
 	const router = useRouter();
 
 	const refreshData = () => {
 		router.replace(router.asPath);
-	};
-
-	const exitSessionHandler = () => {
-		router.push("/");
 	};
 
 	return (
@@ -48,6 +49,7 @@ export default function Booking({ session, show, movie }) {
 						<div className={styles["col-2"]}>
 							<ShowDetails
 								show={show}
+								session={session}
 								posterLink={movie.posterLink}
 								title={movie.title}
 								rating={movie.rating}
@@ -57,9 +59,24 @@ export default function Booking({ session, show, movie }) {
 								theatre={show.theatre.theatre}
 								seats={session.seats}
 								language={show.language}
+								expiresAt={session.expiresAt}
 							/>
 							{session.checkoutStep == 1 && (
-								<TicketSelection session={session} onProceed={refreshData} />
+								<TicketSelection
+									session={session}
+									onProceed={refreshData}
+									fee={BOOKINGFEE}
+								/>
+							)}
+							{session.checkoutStep == 2 && (
+								<TheatreContainer
+									session={session}
+									showId={show._id}
+									onProceed={refreshData}
+								/>
+							)}
+							{session.checkoutStep == 3 && (
+								<OrderSummary session={session} fee={BOOKINGFEE} />
 							)}
 						</div>
 					</div>

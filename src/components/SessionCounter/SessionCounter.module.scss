@@ -1,0 +1,25 @@
+.container {
+	width: 50%;
+	height: 80px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 1rem;
+
+	h2,
+	h3 {
+		margin: 0;
+	}
+
+	h3 {
+		text-transform: uppercase;
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.container {
+		width: 100%;
+		justify-content: flex-start;
+		gap: 1rem;
+	}
+}
