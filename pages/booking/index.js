@@ -9,7 +9,7 @@ import TicketSelection from "../../src/containers/TicketSelection";
 import TheatreContainer from "../../src/containers/TheatreContainer";
 import OrderSummary from "../../src/containers/OrderSummary";
 import Link from "next/link";
-import { useEffect } from "react";
+import ErrorMessage from "../../src/components/ErrorMessage";
 
 export default function Booking({ session, show, movie }) {
 	const BOOKINGFEE = 1.2;
@@ -80,6 +80,12 @@ export default function Booking({ session, show, movie }) {
 							)}
 						</div>
 					</div>
+				)}
+				{session === false && (
+					<ErrorMessage
+						header="404 - This page could not be found"
+						message="Invalid session. It does not exist or may have expired!"
+					/>
 				)}
 			</main>
 		</div>

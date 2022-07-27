@@ -4,14 +4,15 @@ import Header from "../../components/Header";
 import DateContainer from "../DateContainer";
 import ShowCard from "../../components/ShowCard";
 import { addDays, endOfDay, isPast } from "date-fns";
+import ErrorMessage from "../../components/ErrorMessage";
 
 export default function ShowtimeContainer() {
 	const [shows, setShows] = useState([]);
 	const [movies, setMovies] = useState([]);
-	const [error, setError] = useState({ state: false, message: "" });
+	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		return setError({ state: false, message: "" });
+		return setError(false);
 	}, []);
 
 	const fetchShowsForDate = async (date) => {
@@ -69,7 +70,7 @@ export default function ShowtimeContainer() {
 	const fetchShows = async (date) => {
 		// If the date has past then reset states of shows and movies and return an error
 		if (isPast(addDays(endOfDay(new Date(date)), 1))) {
-			setError({ state: true, message: "Invalid date." });
+			setError(true);
 			setShows([]);
 			setMovies([]);
 			return "Invalid Date";
@@ -89,7 +90,14 @@ export default function ShowtimeContainer() {
 					return await fetchShows(date);
 				}}
 			/>
-			{error.state && <h2>{error.message}</h2>}
+			{error && (
+				<div style={{ margin: "1rem 0" }}>
+					<ErrorMessage
+						header="Sorry, no results were found"
+						message="No showtimes were found based on your selected date. Please choose an alternate date."
+					/>
+				</div>
+			)}
 			{movies?.length > 0 &&
 				movies.map((movie, index) => {
 					return (
