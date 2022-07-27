@@ -6,7 +6,12 @@ import { useRouter } from "next/router";
 import Row from "../../components/Row";
 import Seat from "../../components/Seat";
 
-export default function TheatreContainer({ showId, session, onProceed }) {
+export default function TheatreContainer({
+	showId,
+	session,
+	onProceed,
+	readMode,
+}) {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -96,29 +101,32 @@ export default function TheatreContainer({ showId, session, onProceed }) {
 							key={index}
 							name={row.name}
 							seats={row.seats}
+							readMode={readMode}
 							totalTickets={Number(session.totalTickets)}
 						/>
 					);
 				})}
 			</div>
-			{/* <div className={styles.legend}>
+			<div className={styles.legend}>
 				<div className={styles.seat}>
-					<Seat status="available" />
+					<Seat readOnly={true} status="available" />
 					<h5>Available</h5>
 				</div>
+				{!readMode && (
+					<div className={styles.seat}>
+						<Seat readOnly={true} status="selected" disabled={true} />
+						<h5>Selected</h5>
+					</div>
+				)}
 				<div className={styles.seat}>
-					<Seat status="selected" disabled={true} />
-					<h5>Selected</h5>
-				</div>
-				<div className={styles.seat}>
-					<Seat status="occupied" disabled={true} />
+					<Seat readOnly={true} status="occupied" disabled={true} />
 					<h5>Occupied</h5>
 				</div>
 				<div className={styles.seat}>
-					<Seat status="unavailable" disabled={true} />
+					<Seat readOnly={true} status="unavailable" disabled={true} />
 					<h5>Unavailable</h5>
 				</div>
-			</div> */}
+			</div>
 			<button
 				disabled={
 					Number(session.totalTickets) != seatsSelected.length ? true : false

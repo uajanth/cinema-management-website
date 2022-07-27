@@ -3,7 +3,14 @@ import styles from "./Seat.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { addSeat, removeSeat } from "../../app/seatSlice";
 
-export default function Seat({ id, status, space, totalTickets }) {
+export default function Seat({
+	readMode,
+	readOnly,
+	id,
+	status,
+	space,
+	totalTickets,
+}) {
 	const [statusClass, setStatusClass] = useState(styles[status]);
 	const seatsSelected = useSelector((state) => state.seat.seatsSelected);
 
@@ -63,7 +70,11 @@ export default function Seat({ id, status, space, totalTickets }) {
 		<svg
 			id={id}
 			xmlns="http://www.w3.org/2000/svg"
-			className={`${styles.seat} ${statusClass}`}
+			className={
+				readOnly === true || readMode === true
+					? `${styles["read-only"]} ${styles.seat} ${statusClass}`
+					: `${styles.seat} ${statusClass}`
+			}
 			onClick={seatSelectHandler}
 		>
 			<rect width="100%" height="100%" rx="3" />
