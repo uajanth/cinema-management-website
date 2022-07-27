@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Sus } from "react";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import styles from "../styles/Home.module.scss";
@@ -8,6 +8,7 @@ import NavMenu from "../src/components/NavMenu";
 import Modal from "../src/components/Modal";
 import Carousel from "../src/components/Carousel";
 import ShowtimeContainer from "../src/containers/ShowtimesContainer";
+import TheatreContainer from "../src/containers/TheatreContainer";
 
 export default function Home() {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
@@ -48,11 +49,18 @@ export default function Home() {
 
 	const previewSeatsModal = isBrowser
 		? createPortal(
-				<Modal header="Preview Seats" color="#007DD8">
-					<p>
-						Hello this is going to be a test to see how the content part of the
-						modal adjusts to more content and to varying sizes
-					</p>
+				<Modal
+					header={`${modalState.info.title} - ${modalState.info.date} @ ${modalState.info.time}`}
+					color="#007DD8"
+				>
+					<div
+						style={{
+							paddingTop: "1rem",
+							overflow: "scroll",
+						}}
+					>
+						<TheatreContainer showId={modalState.info.showId} readMode={true} />
+					</div>
 				</Modal>,
 				document.getElementById("modal-root")
 		  )

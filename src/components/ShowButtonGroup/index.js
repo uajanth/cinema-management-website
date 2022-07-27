@@ -4,10 +4,36 @@ import seatIcon from "../../../public/assets/seat-icon.svg";
 import styles from "./ShowButtonGroup.module.scss";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../app/modalSlice";
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
-export default function ShowButtonGroup({ time, showId, disable }) {
+export default function ShowButtonGroup({ showId, title, time, disable }) {
+	const [date, setDate] = useState();
 	const router = useRouter();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		getShowDate();
+	}, []);
+
+	const getShowDate = async () => {
+		try {
+			const response = await fetch(`http://localhost:3000/shows/id/${showId}`, {
+				method: "GET",
+				headers: { "Content-Type": "application/json" },
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				setDate(format(new Date(data[0].date), "PPP"));
+				return;
+			}
+			throw new Error();
+		} catch (error) {
+			console.log(error);
+			return;
+		}
+	};
 
 	const createNewSession = async (id) => {
 		try {
@@ -47,7 +73,12 @@ export default function ShowButtonGroup({ time, showId, disable }) {
 				onClick={
 					!disable
 						? () =>
-								dispatch(showModal({ type: "preview-seats", info: { showId } }))
+								dispatch(
+									showModal({
+										type: "preview-seats",
+										info: { showId, title, date, time },
+									})
+								)
 						: () => {}
 				}
 			>

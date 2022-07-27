@@ -20,6 +20,30 @@ export default function Booking({ session, show, movie }) {
 		router.replace(router.asPath);
 	};
 
+	const deleteSession = async (id) => {
+		try {
+			const response = await fetch(`http://localhost:3000/sessions/id/${id}`, {
+				method: "DELETE",
+				header: { "Content-Type": "application/json" },
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				return data;
+			}
+			throw new Error();
+		} catch (error) {
+			console.log(error);
+			return;
+		}
+	};
+
+	const exitSessionHandler = async () => {
+		const sessionId = router.query.sessionId;
+		await deleteSession(sessionId);
+		router.push("/");
+	};
+
 	return (
 		<div>
 			<Head>
@@ -33,13 +57,16 @@ export default function Booking({ session, show, movie }) {
 			<main className={styles.container}>
 				<LogoBar />
 				<div className={styles["link-container"]}>
-					<Link href="/">
-						<a className={styles.link}>
-							Exit
-							<IoExitOutline className={styles.icon} />
-							<IoExit className={styles.icon2} />
-						</a>
-					</Link>
+					<a
+						className={styles.link}
+						onClick={() => {
+							exitSessionHandler();
+						}}
+					>
+						Exit
+						<IoExitOutline className={styles.icon} />
+						<IoExit className={styles.icon2} />
+					</a>
 				</div>
 				{session && (
 					<div className={styles.content}>

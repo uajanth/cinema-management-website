@@ -116,6 +116,7 @@ export default function ShowCard({
 													return (
 														<ShowButtonGroup
 															key={index}
+															showId={show._id}
 															time={show.startTime12}
 															disable={true}
 														/>
@@ -125,6 +126,7 @@ export default function ShowCard({
 													<ShowButtonGroup
 														key={index}
 														showId={show._id}
+														title={title}
 														time={show.startTime12}
 													/>
 												);

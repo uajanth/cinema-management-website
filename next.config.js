@@ -13,6 +13,9 @@ const nextConfig = {
 			path.join(__dirname, "components/*"),
 		],
 	},
+	experimental: {
+		reactMode: "concurrent",
+	},
 };
 
 module.exports = nextConfig;

@@ -1,5 +1,5 @@
 import styles from "./TheatreContainer.module.scss";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { resetSeat } from "../../app/seatSlice";
 import { useRouter } from "next/router";
@@ -13,18 +13,14 @@ export default function TheatreContainer({
 	readMode,
 }) {
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(resetSeat());
-	}, []);
+	const router = useRouter();
+	const sessionId = router.query.sessionId;
 
 	const seatsSelected = useSelector((state) => state.seat.seatsSelected);
 	const [rows, setRows] = useState([]);
 
-	const router = useRouter();
-	const sessionId = router.query.sessionId;
-
 	useEffect(() => {
+		dispatch(resetSeat());
 		fetchTheatreForShow(showId);
 	}, []);
 
@@ -91,55 +87,61 @@ export default function TheatreContainer({
 		return;
 	};
 
-	return (
-		<main className={styles.main}>
-			<div className={styles.screen}>SCREEN</div>
-			<div className={styles.row}>
-				{rows?.map((row, index) => {
-					return (
-						<Row
-							key={index}
-							name={row.name}
-							seats={row.seats}
-							readMode={readMode}
-							totalTickets={Number(session.totalTickets)}
-						/>
-					);
-				})}
-			</div>
-			<div className={styles.legend}>
-				<div className={styles.seat}>
-					<Seat readOnly={true} status="available" />
-					<h5>Available</h5>
+	if (rows.length > 0) {
+		return (
+			<main className={styles.main}>
+				<div className={styles.screen}>SCREEN</div>
+				<div className={styles.row}>
+					{rows?.map((row, index) => {
+						return (
+							<Row
+								key={index}
+								name={row.name}
+								seats={row.seats}
+								readMode={readMode}
+								totalTickets={session ? Number(session.totalTickets) : 0}
+							/>
+						);
+					})}
+				</div>
+				<div className={styles.legend}>
+					<div className={styles.seat}>
+						<Seat readOnly={true} status="available" />
+						<h5>Available</h5>
+					</div>
+					{!readMode && (
+						<div className={styles.seat}>
+							<Seat readOnly={true} status="selected" disabled={true} />
+							<h5>Selected</h5>
+						</div>
+					)}
+					<div className={styles.seat}>
+						<Seat readOnly={true} status="occupied" disabled={true} />
+						<h5>Occupied</h5>
+					</div>
+					<div className={styles.seat}>
+						<Seat readOnly={true} status="unavailable" disabled={true} />
+						<h5>Unavailable</h5>
+					</div>
 				</div>
 				{!readMode && (
-					<div className={styles.seat}>
-						<Seat readOnly={true} status="selected" disabled={true} />
-						<h5>Selected</h5>
-					</div>
+					<button
+						disabled={
+							Number(session.totalTickets) != seatsSelected.length
+								? true
+								: false
+						}
+						className={
+							Number(session.totalTickets) === seatsSelected.length
+								? `${styles.proceed}`
+								: `${styles.proceed} ${styles.disabled}`
+						}
+						onClick={() => proceedHandler()}
+					>
+						Proceed
+					</button>
 				)}
-				<div className={styles.seat}>
-					<Seat readOnly={true} status="occupied" disabled={true} />
-					<h5>Occupied</h5>
-				</div>
-				<div className={styles.seat}>
-					<Seat readOnly={true} status="unavailable" disabled={true} />
-					<h5>Unavailable</h5>
-				</div>
-			</div>
-			<button
-				disabled={
-					Number(session.totalTickets) != seatsSelected.length ? true : false
-				}
-				className={
-					Number(session.totalTickets) === seatsSelected.length
-						? `${styles.proceed}`
-						: `${styles.proceed} ${styles.disabled}`
-				}
-				onClick={() => proceedHandler()}
-			>
-				Proceed
-			</button>
-		</main>
-	);
+			</main>
+		);
+	}
 }

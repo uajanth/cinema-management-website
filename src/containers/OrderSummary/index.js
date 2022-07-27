@@ -70,6 +70,24 @@ export default function OrderSummary({ session, onProceed, fee }) {
 		}
 	};
 
+	const deleteSession = async (id) => {
+		try {
+			const response = await fetch(`http://localhost:3000/sessions/id/${id}`, {
+				method: "DELETE",
+				header: { "Content-Type": "application/json" },
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				return data;
+			}
+			throw new Error();
+		} catch (error) {
+			console.log(error);
+			return;
+		}
+	};
+
 	const submitHandler = async (seats) => {
 		if (checked) {
 			const transformSeats = seats.split(", ");
@@ -81,6 +99,8 @@ export default function OrderSummary({ session, onProceed, fee }) {
 					console.log(error);
 				}
 			}
+
+			await deleteSession(sessionId);
 
 			router.replace("/");
 		}

@@ -1,7 +1,7 @@
 import styles from "./Row.module.scss";
 import Seat from "../Seat";
 
-function Row({ name, seats, onSelectSeat, disabled, totalTickets }) {
+function Row({ name, seats, onSelectSeat, disabled, totalTickets, readMode }) {
 	return (
 		<div className={styles.row}>
 			<p
@@ -21,6 +21,7 @@ function Row({ name, seats, onSelectSeat, disabled, totalTickets }) {
 					return (
 						<Seat
 							totalTickets={totalTickets}
+							readMode={readMode}
 							onClick={() => onSelectSeat(seat.label, seat.status)}
 							key={index}
 							id={seat.label}
