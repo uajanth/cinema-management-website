@@ -1,11 +1,18 @@
 import styles from "./TheatreContainer.module.scss";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { resetSeat } from "../../app/seatSlice";
 import { useRouter } from "next/router";
 import Row from "../../components/Row";
 import Seat from "../../components/Seat";
 
 export default function TheatreContainer({ showId, session, onProceed }) {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(resetSeat());
+	}, []);
+
 	const seatsSelected = useSelector((state) => state.seat.seatsSelected);
 	const [rows, setRows] = useState([]);
 
@@ -78,8 +85,6 @@ export default function TheatreContainer({ showId, session, onProceed }) {
 		}
 		return;
 	};
-
-	console.log(1, session);
 
 	return (
 		<main className={styles.main}>

@@ -1,9 +1,17 @@
 import styles from "./TicketSelection.module.scss";
 import TicketItem from "../../components/TicketItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { resetTickets } from "../../app/ticketSlice";
+import { useEffect } from "react";
 
 export default function TicketSelection({ session, onProceed, fee }) {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(resetTickets());
+	}, []);
+
 	const router = useRouter();
 	const sessionId = router.query.sessionId;
 
@@ -38,7 +46,6 @@ export default function TicketSelection({ session, onProceed, fee }) {
 						checkoutStep: "2",
 					}),
 				});
-				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
 					onProceed();
@@ -66,6 +73,8 @@ export default function TicketSelection({ session, onProceed, fee }) {
 					/>
 				);
 			})}
+			<hr className={styles.divider} />
+
 			<div className={styles["line-container"]}>
 				<p className={styles["line-heading"]}>Booking Fee</p>
 				<p>{`$${bookingSubtotal.toFixed(2)}`}</p>

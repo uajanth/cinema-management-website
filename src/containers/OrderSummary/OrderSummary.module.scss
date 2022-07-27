@@ -10,6 +10,23 @@
 		margin: 0;
 	}
 
+	.group {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin: 0;
+
+		.group-info {
+			display: flex;
+			gap: 0.5rem;
+			align-items: center;
+			margin: 0;
+		}
+		h2 {
+			margin: 0;
+		}
+	}
+
 	.divider {
 		background-color: black;
 		width: 100%;
@@ -35,7 +52,7 @@
 		font-size: 0.8rem;
 	}
 
-	.proceed {
+	.submit {
 		width: 100%;
 		background-color: #274eda;
 		border: none;
@@ -45,7 +62,7 @@
 		text-transform: uppercase;
 	}
 
-	.proceed:hover {
+	.submit:hover {
 		cursor: pointer;
 	}
 

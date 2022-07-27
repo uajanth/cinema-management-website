@@ -17,13 +17,13 @@ export const seatSlice = createSlice({
 			state.seatsSelected.splice(existingIndex, 1);
 			state.seatsSelected = state.seatsSelected;
 		},
-		resetSeats: (state) => {
-			state.seatsSelected = [];
+		resetSeat: (state) => {
+			state.seatsSelected = initialState.seatsSelected;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { addSeat, removeSeat } = seatSlice.actions;
+export const { addSeat, removeSeat, resetSeat } = seatSlice.actions;
 
 export default seatSlice.reducer;

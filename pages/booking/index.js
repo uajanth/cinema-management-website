@@ -7,7 +7,9 @@ import CheckoutProgress from "../../src/components/CheckoutProgress";
 import ShowDetails from "../../src/components/ShowDetails";
 import TicketSelection from "../../src/containers/TicketSelection";
 import TheatreContainer from "../../src/containers/TheatreContainer";
+import OrderSummary from "../../src/containers/OrderSummary";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Booking({ session, show, movie }) {
 	const BOOKINGFEE = 1.2;
@@ -18,7 +20,6 @@ export default function Booking({ session, show, movie }) {
 		router.replace(router.asPath);
 	};
 
-	console.log(session);
 	return (
 		<div>
 			<Head>
@@ -73,6 +74,9 @@ export default function Booking({ session, show, movie }) {
 									showId={show._id}
 									onProceed={refreshData}
 								/>
+							)}
+							{session.checkoutStep == 3 && (
+								<OrderSummary session={session} fee={BOOKINGFEE} />
 							)}
 						</div>
 					</div>
