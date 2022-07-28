@@ -12,7 +12,7 @@ export default function ShowtimeContainer() {
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		return setError(false);
+		setError(false);
 	}, []);
 
 	const fetchShowsForDate = async (date) => {
@@ -90,7 +90,7 @@ export default function ShowtimeContainer() {
 					return await fetchShows(date);
 				}}
 			/>
-			{error && (
+			{error && movies.length <= 0 && (
 				<div style={{ margin: "1rem 0" }}>
 					<ErrorMessage
 						header="Sorry, no results were found"
