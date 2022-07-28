@@ -1,3 +1,5 @@
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -10,6 +12,9 @@ const nextConfig = {
 			path.join(__dirname, "styles"),
 			path.join(__dirname, "components/*"),
 		],
+	},
+	experimental: {
+		reactMode: "concurrent",
 	},
 };
 

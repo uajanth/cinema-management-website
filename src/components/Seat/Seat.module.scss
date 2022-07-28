@@ -1,0 +1,33 @@
+.seat {
+	width: 20px;
+	height: 20px;
+	margin: 2px;
+}
+
+.space {
+	fill: #ffffff;
+}
+
+.read-only {
+	cursor: default !important;
+}
+
+.available {
+	fill: #9ca3af;
+	cursor: pointer;
+}
+
+.selected {
+	fill: #274eda;
+	cursor: pointer;
+}
+
+.occupied {
+	fill: #d81d1d;
+	cursor: not-allowed;
+}
+
+.unavailable {
+	fill: #000000;
+	cursor: not-allowed;
+}

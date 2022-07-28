@@ -1,0 +1,9 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	min-width: base.$container-minWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

@@ -1,0 +1,89 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	min-width: base.$container-minWidth;
+	padding: 1rem;
+	color: black;
+
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+
+	.col-1 {
+		.poster {
+			background-color: black;
+			width: 135px;
+			height: 205px;
+		}
+	}
+	.col-2 {
+		.heading {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			gap: 0.25rem;
+			margin-bottom: 0.4rem;
+
+			h3 {
+				margin: 0;
+			}
+			h4 {
+				font-weight: 500;
+				margin: 0;
+			}
+		}
+		.cast {
+			margin-bottom: 0.4rem;
+			h5 {
+				font-size: 0.9rem;
+				margin: 0;
+				font-weight: 500;
+			}
+		}
+
+		.director {
+			margin-bottom: 0.4rem;
+			h5 {
+				font-size: 0.9rem;
+				margin: 0;
+				font-weight: 500;
+			}
+		}
+
+		.trailer {
+			color: base.$primary-color;
+			margin-bottom: 0.6rem;
+
+			.link {
+				color: inherit;
+				font-size: 0.9rem;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				column-gap: 0.25rem;
+				margin-bottom: 0;
+				text-decoration: none;
+				padding: 0.5rem 0;
+			}
+
+			h4 {
+				margin: 0;
+			}
+		}
+
+		.languages {
+			.language {
+				margin-bottom: 0.5rem;
+			}
+			.shows {
+				max-width: 750px; // Need to adjust later based on mediaquery values
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 0.8rem;
+			}
+		}
+	}
+}

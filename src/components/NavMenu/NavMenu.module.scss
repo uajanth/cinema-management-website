@@ -6,6 +6,7 @@ $link-color: #007dd8;
 .container {
 	width: base.$container-width;
 	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;

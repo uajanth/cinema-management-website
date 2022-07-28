@@ -1,11 +1,71 @@
+import { useState, useEffect, Sus } from "react";
+import { createPortal } from "react-dom";
+import { useSelector } from "react-redux";
 import styles from "../styles/Home.module.scss";
 import Head from "next/head";
-import Image from "next/image";
 import LogoBar from "../src/components/LogoBar";
 import NavMenu from "../src/components/NavMenu";
+import Modal from "../src/components/Modal";
 import Carousel from "../src/components/Carousel";
+import ShowtimeContainer from "../src/containers/ShowtimesContainer";
+import TheatreContainer from "../src/containers/TheatreContainer";
 
 export default function Home() {
+	const [isBrowser, setIsBrowser] = useState(false); // required to access document
+	const modalState = useSelector((state) => state.modal); // redux modalState
+
+	useEffect(() => {
+		setIsBrowser(true); // set to true when document is loaded/accessible
+	}, []);
+
+	// Disable background scroll when modal is visible
+	if (isBrowser && modalState.isVisible) {
+		const body = document.querySelector("body");
+		body.style.overflow = "hidden";
+	}
+
+	// Reset disabled background scroll behavior
+	if (isBrowser && !modalState.isVisible) {
+		const body = document.querySelector("body");
+		body.style.overflow = "";
+	}
+
+	const trailerModal =
+		isBrowser && modalState.type === "view-trailer"
+			? createPortal(
+					<Modal header={`${modalState.info.title} - Trailer`} color="#007DD8">
+						<iframe
+							width="100%"
+							height="400px"
+							frameBorder="0"
+							border="0"
+							cellSpacing="0"
+							src={`${modalState.info.trailerLink}?autoplay=1`}
+						></iframe>
+					</Modal>,
+					document.getElementById("modal-root")
+			  )
+			: null;
+
+	const previewSeatsModal = isBrowser
+		? createPortal(
+				<Modal
+					header={`${modalState.info.title} - ${modalState.info.date} @ ${modalState.info.time}`}
+					color="#007DD8"
+				>
+					<div
+						style={{
+							paddingTop: "1rem",
+							overflow: "scroll",
+						}}
+					>
+						<TheatreContainer showId={modalState.info.showId} readMode={true} />
+					</div>
+				</Modal>,
+				document.getElementById("modal-root")
+		  )
+		: null;
+
 	return (
 		<div>
 			<Head>
@@ -14,10 +74,23 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
+			{/* View Trailer Modal */}
+			{isBrowser &&
+				modalState.isVisible &&
+				modalState.type === "view-trailer" &&
+				trailerModal}
+
+			{/* Preview Seats Modal */}
+			{isBrowser &&
+				modalState.isVisible &&
+				modalState.type === "preview-seats" &&
+				previewSeatsModal}
+
 			<main className={styles.container}>
 				<LogoBar />
 				<NavMenu />
 				<Carousel />
+				<ShowtimeContainer />
 			</main>
 
 			{/* <footer className={styles.footer}>
