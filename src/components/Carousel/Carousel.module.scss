@@ -2,11 +2,14 @@
 
 .container {
 	background-color: rgb(29, 29, 29);
-	width: base.$container-width;
-	max-width: base.$container-maxWidth;
-	min-width: base.$container-minWidth;
-	height: fit-content;
+	width: 1200px;
+	height: 400px;
+	// width: base.$container-width;
+	// max-width: base.$container-maxWidth;
+	// min-width: base.$container-minWidth;
+	overflow: hidden;
 
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

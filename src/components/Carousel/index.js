@@ -8,15 +8,10 @@ export default function Carousel() {
 			<Image
 				src={banner}
 				alt="cobra banner"
-				width="1200"
-				height="400"
-				layout="intrinsic"
+				layout="fill"
 				style={{
-					objectFit: "cover",
 					position: "absolute",
-					top: 0,
-					left: 0,
-					maxHeight: "100%",
+					objectFit: "cover",
 				}}
 			/>
 		</div>
