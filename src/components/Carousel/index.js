@@ -1,9 +1,7 @@
 import styles from "./Carousel.module.scss";
+import Image from "next/image";
 
 export default function Carousel() {
-<<<<<<< Updated upstream
-	return <div className={styles.container}></div>;
-=======
 	return (
 		<div className={styles.container}>
 			<Image
@@ -17,5 +15,4 @@ export default function Carousel() {
 			/>
 		</div>
 	);
->>>>>>> Stashed changes
 }
