@@ -8,11 +8,11 @@ export default function Carousel() {
 			<Image
 				src={banner}
 				alt="cobra banner"
+				quality={100}
 				layout="fill"
-				style={{
-					position: "absolute",
-					objectFit: "cover",
-				}}
+				objectFit="cover"
+				objectPosition="center"
+				priority
 			/>
 		</div>
 	);
