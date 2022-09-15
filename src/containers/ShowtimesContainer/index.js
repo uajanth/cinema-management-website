@@ -28,7 +28,6 @@ export default function ShowtimeContainer() {
 			}
 			throw new Error();
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
@@ -46,7 +45,7 @@ export default function ShowtimeContainer() {
 	const filterShowsForUniqueMovies = async (shows) => {
 		// Filter all shows for movies
 		const movies = [];
-		shows.forEach((show) => movies.push(show.movie));
+		shows?.forEach((show) => movies.push(show.movie));
 		// Filter all movies for unique movies
 		const uniqueMoviesById = await createUniqueMovieArray(movies);
 		return uniqueMoviesById;
