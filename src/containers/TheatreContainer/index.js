@@ -27,7 +27,7 @@ export default function TheatreContainer({
 	const fetchTheatreForShow = async (id) => {
 		try {
 			const response = await fetch(
-				`http://localhost:3000/shows/id/${id}/theatre`,
+				`https://gorgeous-blue-fedora.cyclic.app/shows/id/${id}/theatre`,
 				{
 					method: "GET",
 					headers: { "Content-Type": "application/json" },
@@ -60,17 +60,20 @@ export default function TheatreContainer({
 	const proceedHandler = async (state) => {
 		if (Number(session.totalTickets) === seatsSelected.length) {
 			try {
-				const response = await fetch(`http://localhost:3000/sessions/id`, {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: sessionId,
-						totalTickets: "false",
-						ticketsByGroup: "false",
-						seatsSelected: seatsSelected.join(", "),
-						checkoutStep: "3",
-					}),
-				});
+				const response = await fetch(
+					`https://gorgeous-blue-fedora.cyclic.app/sessions/id`,
+					{
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							id: sessionId,
+							totalTickets: "false",
+							ticketsByGroup: "false",
+							seatsSelected: seatsSelected.join(", "),
+							checkoutStep: "3",
+						}),
+					}
+				);
 				console.log(response);
 				if (response.ok) {
 					const data = await response.json();

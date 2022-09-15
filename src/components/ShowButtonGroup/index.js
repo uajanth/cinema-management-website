@@ -18,10 +18,13 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 
 	const getShowDate = async () => {
 		try {
-			const response = await fetch(`http://localhost:3000/shows/id/${showId}`, {
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/shows/id/${showId}`,
+				{
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -37,11 +40,14 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 
 	const createNewSession = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3000/sessions`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ showId: id }),
-			});
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/sessions`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ showId: id }),
+				}
+			);
 
 			if (response.ok) {
 				const session = await response.json();

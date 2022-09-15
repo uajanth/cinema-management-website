@@ -51,14 +51,17 @@ export default function OrderSummary({ session, onProceed, fee }) {
 
 	const updateSeat = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3000/shows/seat`, {
-				method: "PUT",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					id: session.showId,
-					seatId: id,
-				}),
-			});
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/shows/seat`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						id: session.showId,
+						seatId: id,
+					}),
+				}
+			);
 			if (response.ok) {
 				console.log(`seat(${id}) updated!`);
 				return;
@@ -72,10 +75,13 @@ export default function OrderSummary({ session, onProceed, fee }) {
 
 	const deleteSession = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3000/sessions/id/${id}`, {
-				method: "DELETE",
-				header: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/sessions/id/${id}`,
+				{
+					method: "DELETE",
+					header: { "Content-Type": "application/json" },
+				}
+			);
 
 			if (response.ok) {
 				const data = await response.json();

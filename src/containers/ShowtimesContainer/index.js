@@ -17,7 +17,9 @@ export default function ShowtimeContainer() {
 
 	const fetchShowsForDate = async (date) => {
 		try {
-			const response = await fetch(`http://localhost:3000/shows/date/${date}`);
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/shows/date/${date}`
+			);
 			if (response.ok) {
 				const shows = await response.json();
 				// Save shows as state
@@ -54,7 +56,9 @@ export default function ShowtimeContainer() {
 		// Sanitize request input as a string
 		const id = ids.join();
 		try {
-			const response = await fetch(`http://localhost:3000/movies/id/${id}`);
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/movies/id/${id}`
+			);
 			if (response.ok) {
 				const movies = await response.json();
 				setMovies(movies);
