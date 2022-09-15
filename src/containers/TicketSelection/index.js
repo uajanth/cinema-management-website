@@ -35,17 +35,20 @@ export default function TicketSelection({ session, onProceed, fee }) {
 		if (state.totalTickets > 0) {
 			const jsonTicketsByGroup = JSON.stringify(state.ticketsByGroup);
 			try {
-				const response = await fetch(`http://localhost:3000/sessions/id`, {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: sessionId,
-						totalTickets,
-						ticketsByGroup: jsonTicketsByGroup,
-						seatsSelected: "false",
-						checkoutStep: "2",
-					}),
-				});
+				const response = await fetch(
+					`https://gorgeous-blue-fedora.cyclic.app/sessions/id`,
+					{
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							id: sessionId,
+							totalTickets,
+							ticketsByGroup: jsonTicketsByGroup,
+							seatsSelected: "false",
+							checkoutStep: "2",
+						}),
+					}
+				);
 				if (response.ok) {
 					const data = await response.json();
 					onProceed();

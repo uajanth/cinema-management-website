@@ -22,10 +22,13 @@ export default function Booking({ session, show, movie }) {
 
 	const deleteSession = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3000/sessions/id/${id}`, {
-				method: "DELETE",
-				header: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`https://gorgeous-blue-fedora.cyclic.app/sessions/id/${id}`,
+				{
+					method: "DELETE",
+					header: { "Content-Type": "application/json" },
+				}
+			);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -124,14 +127,14 @@ export async function getServerSideProps(context) {
 	// 2. Get Show > Get Movie
 	try {
 		const sessionResponse = await fetch(
-			`http://localhost:3000/sessions/id/${context.query.sessionId}`
+			`https://gorgeous-blue-fedora.cyclic.app/sessions/id/${context.query.sessionId}`
 		);
 		if (sessionResponse.ok) {
 			const session = await sessionResponse.json();
 
 			try {
 				const showResponse = await fetch(
-					`http://localhost:3000/shows/id/${session.sessionDetails.showId}`
+					`https://gorgeous-blue-fedora.cyclic.app/shows/id/${session.sessionDetails.showId}`
 				);
 
 				if (showResponse.ok) {
