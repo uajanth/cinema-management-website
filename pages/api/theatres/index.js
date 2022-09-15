@@ -1,5 +1,5 @@
-import connectMongo from "utils/connectMongo";
-import Theatre from "models/theatre.js";
+import connectMongo from "../../../utils/connectMongo";
+import Theatre from "../../../models/theatre";
 
 export default async function handler(req, res) {
 	const { method } = req;

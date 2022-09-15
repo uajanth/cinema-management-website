@@ -1,4 +1,4 @@
-import connectMongo from "utils/connectMongo";
+import connectMongo from "../../../../utils/connectMongo";
 import Show from "models/show";
 
 export default async function handler(req, res) {

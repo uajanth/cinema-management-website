@@ -1,5 +1,5 @@
-import connectMongo from "utils/connectMongo";
-import Movie from "models/movie.js";
+import connectMongo from "../../../utils/connectMongo";
+import Movie from "../../../models/movie";
 
 export default async function handler(req, res) {
 	const { method } = req;
