@@ -5,7 +5,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ["imdb-api.com", "drive.google.com"],
+		domains: ["imdb-api.com", "drive.google.com", "m.media-amazon.com"],
 	},
 	sassOptions: {
 		includePaths: [
