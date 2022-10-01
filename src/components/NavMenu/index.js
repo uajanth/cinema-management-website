@@ -35,7 +35,7 @@ export default function NavMenu() {
 					Search
 				</a>
 			</Link>
-			<Link id="upcoming" href="/" passHref>
+			<Link id="upcoming" href="/upcoming" passHref>
 				<a className={styles.link}>
 					<IoCalendarOutline className={styles.icon} />
 					<IoCalendar className={styles.icon2} />

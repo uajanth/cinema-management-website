@@ -25,7 +25,7 @@ export default function ShowCard({
 
 	useEffect(() => {
 		setShowLanguages(transformLanguage(language));
-	}, []);
+	}, [language]);
 
 	const dispatch = useDispatch();
 
