@@ -14,16 +14,6 @@ import "react-modern-drawer/dist/index.css";
 export default function Home() {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
 	const modalState = useSelector((state) => state.modal); // redux modalState
-	const [drawer, setDrawer] = useState({ state: false, type: false });
-
-	const toggleDrawer = (type) => {
-		setDrawer((prev) => {
-			return {
-				state: !prev.state,
-				type,
-			};
-		});
-	};
 
 	useEffect(() => {
 		setIsBrowser(true); // set to true when document is loaded/accessible
