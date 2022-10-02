@@ -70,5 +70,9 @@ $link-color: #007dd8;
 			flex-direction: row;
 			gap: 0.1rem;
 		}
+
+		.link:last-child {
+			margin-right: 0;
+		}
 	}
 }
