@@ -11,10 +11,22 @@ import ShowtimeContainer from "../src/containers/ShowtimesContainer";
 import TheatreContainer from "../src/containers/TheatreContainer";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
+import CinemasLocationCard from "../src/components/CinemasLocationCard";
+import NavDrawer from "../src/components/NavDrawer";
 
 export default function Home() {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
 	const modalState = useSelector((state) => state.modal); // redux modalState
+	const [drawer, setDrawer] = useState({ state: false, type: false });
+
+	const toggleDrawer = (type) => {
+		setDrawer((prev) => {
+			return {
+				state: !prev.state,
+				type,
+			};
+		});
+	};
 
 	useEffect(() => {
 		setIsBrowser(true); // set to true when document is loaded/accessible
@@ -93,6 +105,10 @@ export default function Home() {
 			<Carousel />
 			<main className={styles.container}>
 				<div className={styles.content}>
+					<NavDrawer
+						drawer={drawer}
+						onClose={(type) => setDrawer({ state: false, type })}
+					/>
 					<ShowtimeContainer />
 				</div>
 			</main>

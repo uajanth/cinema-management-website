@@ -1,0 +1,26 @@
+@use "./styles/base";
+
+.container {
+	color: #414141;
+	border: 2px solid #414141;
+	border-radius: 0.5rem;
+	padding: 1rem;
+
+	h4 {
+		font-size: minmax(1rem, calc(30vw * 0.04));
+		margin: 0;
+	}
+
+	h5 {
+		font-size: minmax(1rem, calc(30vw * 0.025));
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+.container:hover {
+	cursor: not-allowed;
+}

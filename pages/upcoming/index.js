@@ -15,7 +15,6 @@ export default function Upcoming() {
 			<LogoBar />
 			<NavMenu />
 			<main className={styles.container}>
-				{/* Temporary */}
 				<div className={styles.content}>
 					<div className={styles.box}>
 						<div className={styles.line1}>
