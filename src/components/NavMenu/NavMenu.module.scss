@@ -54,10 +54,6 @@ $link-color: #007dd8;
 			display: block;
 		}
 	}
-
-	.link:last-child {
-		margin-right: 2rem;
-	}
 }
 
 @media screen and (min-width: base.$breakpoint_tablet) {
@@ -72,7 +68,7 @@ $link-color: #007dd8;
 		}
 
 		.link:last-child {
-			margin-right: 0;
+			margin-right: 2rem;
 		}
 	}
 }
