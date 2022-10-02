@@ -52,7 +52,6 @@ export default function TheatreContainer({
 
 			throw new Error(error);
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
@@ -74,16 +73,13 @@ export default function TheatreContainer({
 						}),
 					}
 				);
-				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
 					onProceed();
-					console.log("Moving onto step 3!");
 					return;
 				}
 				throw new Error();
 			} catch (error) {
-				console.log(error);
 				return;
 			}
 		}

@@ -63,12 +63,11 @@ export default function OrderSummary({ session, onProceed, fee }) {
 				}
 			);
 			if (response.ok) {
-				console.log(`seat(${id}) updated!`);
+				// console.log(`seat(${id}) updated!`);
 				return;
 			}
 			throw new Error();
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
@@ -89,7 +88,6 @@ export default function OrderSummary({ session, onProceed, fee }) {
 			}
 			throw new Error();
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
@@ -101,9 +99,7 @@ export default function OrderSummary({ session, onProceed, fee }) {
 			for (let i = 0; i < transformSeats.length; i++) {
 				try {
 					await updateSeat(transformSeats[i]);
-				} catch (error) {
-					console.log(error);
-				}
+				} catch (error) {}
 			}
 
 			await deleteSession(sessionId);

@@ -65,7 +65,6 @@ export default function ShowtimeContainer() {
 			}
 			throw new Error();
 		} catch (error) {
-			console.log("No movies playing.");
 			return;
 		}
 	};

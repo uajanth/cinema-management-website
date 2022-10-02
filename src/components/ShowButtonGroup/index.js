@@ -33,7 +33,6 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 			}
 			throw new Error();
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
@@ -55,14 +54,12 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 			}
 			throw new Error();
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	};
 
 	const startBookingForShow = async (id) => {
 		const session = await createNewSession(id);
-		console.log(session);
 		router.push(`/booking?sessionId=${session.id}`);
 	};
 

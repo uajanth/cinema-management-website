@@ -52,12 +52,10 @@ export default function TicketSelection({ session, onProceed, fee }) {
 				if (response.ok) {
 					const data = await response.json();
 					onProceed();
-					console.log("Moving onto step 2!");
 					return;
 				}
 				throw new Error();
 			} catch (error) {
-				console.log(error);
 				return;
 			}
 		}
