@@ -2,6 +2,7 @@ import styles from "../../styles/Upcoming.module.scss";
 import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
+import "react-modern-drawer/dist/index.css";
 
 export default function Upcoming() {
 	return (
@@ -17,9 +18,7 @@ export default function Upcoming() {
 			<main className={styles.container}>
 				<div className={styles.content}>
 					<div className={styles.box}>
-						<div className={styles.line1}>
-							<h2>Coming Soon</h2>
-						</div>
+						<h2>Coming Soon</h2>
 					</div>
 				</div>
 			</main>
