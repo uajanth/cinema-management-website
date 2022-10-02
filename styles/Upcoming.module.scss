@@ -2,12 +2,15 @@
 
 .container {
 	width: base.$container-width;
-	max-width: base.$container-maxWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .content {
 	color: white;
-	width: base.$container-width;
+	width: 100%;
 	min-width: base.$container-minWidth;
 	max-width: base.$container-maxWidth;
 	display: flex;

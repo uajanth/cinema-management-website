@@ -57,8 +57,8 @@ export default function Booking({ session, show, movie }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
+			<LogoBar />
 			<main className={styles.container}>
-				<LogoBar />
 				<div className={styles["link-container"]}>
 					<a
 						className={styles.link}

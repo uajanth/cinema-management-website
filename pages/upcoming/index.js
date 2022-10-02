@@ -12,10 +12,9 @@ export default function Upcoming() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
+			<LogoBar />
+			<NavMenu />
 			<main className={styles.container}>
-				<LogoBar />
-				<NavMenu />
-
 				{/* Temporary */}
 				<div className={styles.content}>
 					<div className={styles.box}>

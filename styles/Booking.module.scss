@@ -5,7 +5,10 @@ $link-color: #007dd8;
 
 .container {
 	width: base.$container-width;
-	max-width: base.$container-maxWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
 	.link-container {
 		width: base.$container-width;

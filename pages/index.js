@@ -1,4 +1,4 @@
-import { useState, useEffect, Sus } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import styles from "../styles/Home.module.scss";
@@ -9,6 +9,8 @@ import Modal from "../src/components/Modal";
 import Carousel from "../src/components/Carousel";
 import ShowtimeContainer from "../src/containers/ShowtimesContainer";
 import TheatreContainer from "../src/containers/TheatreContainer";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 export default function Home() {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
@@ -86,25 +88,14 @@ export default function Home() {
 				modalState.type === "preview-seats" &&
 				previewSeatsModal}
 
+			<LogoBar />
+			<NavMenu />
+			<Carousel />
 			<main className={styles.container}>
-				<LogoBar />
-				<NavMenu />
-				<Carousel />
-				<ShowtimeContainer />
+				<div className={styles.content}>
+					<ShowtimeContainer />
+				</div>
 			</main>
-
-			{/* <footer className={styles.footer}>
-				<a
-					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Powered by{" "}
-					<span className={styles.logo}>
-						<Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-					</span>
-				</a>
-			</footer> */}
 		</div>
 	);
 }

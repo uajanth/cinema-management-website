@@ -5,7 +5,7 @@ $link-color: #007dd8;
 
 .container {
 	width: base.$container-width;
-	max-width: base.$container-maxWidth;
+	// max-width: base.$container-maxWidth;
 	min-width: base.$container-minWidth;
 	display: flex;
 	flex-direction: row;
@@ -55,9 +55,9 @@ $link-color: #007dd8;
 		}
 	}
 
-	// .link:last-of-type {
-	// 	background-color: red;
-	// }
+	.link:last-child {
+		margin-right: 2rem;
+	}
 }
 
 @media screen and (min-width: base.$breakpoint_tablet) {
