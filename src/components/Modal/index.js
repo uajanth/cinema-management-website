@@ -7,20 +7,22 @@ export default function Modal({ header, color, children }) {
 	const dispatch = useDispatch();
 
 	return (
-		<div
-			className={styles.backdrop}
-			onClick={() => {
-				dispatch(hideModal());
-			}}
-		>
+		<div>
 			<div
-				className={styles.foreground}
-				onClick={(event) => {
-					event.stopPropagation();
+				className={styles.backdrop}
+				onClick={() => {
+					dispatch(hideModal());
 				}}
 			>
-				<Header text={header} color={color} />
-				<div className={styles.content}>{children}</div>
+				<div
+					className={styles.foreground}
+					onClick={(event) => {
+						event.stopPropagation();
+					}}
+				>
+					<Header text={header} color={color} />
+					<div className={styles.content}>{children}</div>
+				</div>
 			</div>
 		</div>
 	);
