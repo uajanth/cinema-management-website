@@ -88,7 +88,10 @@ export default function TheatreContainer({
 
 	if (rows.length > 0) {
 		return (
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				style={{ width: readMode ? "100%" : "" }}
+			>
 				<div className={styles.content}>
 					<div className={styles.screen}>SCREEN</div>
 					<div className={styles.row}>
@@ -105,28 +108,51 @@ export default function TheatreContainer({
 						})}
 					</div>
 					<div className={styles.legend}>
-						<div className={styles.box1}>
-							<div className={styles.seat}>
-								<Seat readOnly={true} status="available" />
-								<h5>Available</h5>
-							</div>
-							{!readMode && (
+						{readMode ? (
+							<div className={styles.box1} style={{ justifyContent: "center" }}>
 								<div className={styles.seat}>
-									<Seat readOnly={true} status="selected" disabled={true} />
-									<h5>Selected</h5>
+									<Seat readOnly={true} status="available" />
+									<h5>Available</h5>
 								</div>
-							)}
-						</div>
-						<div className={styles.box2}>
-							<div className={styles.seat}>
-								<Seat readOnly={true} status="occupied" disabled={true} />
-								<h5>Occupied</h5>
+								<div className={styles.seat}>
+									<Seat readOnly={true} status="occupied" disabled={true} />
+									<h5>Occupied</h5>
+								</div>
+								<div className={styles.seat}>
+									<Seat readOnly={true} status="unavailable" disabled={true} />
+									<h5>Unavailable</h5>
+								</div>
 							</div>
-							<div className={styles.seat}>
-								<Seat readOnly={true} status="unavailable" disabled={true} />
-								<h5>Unavailable</h5>
-							</div>
-						</div>
+						) : (
+							<>
+								<div className={styles.box1}>
+									<div className={styles.seat}>
+										<Seat readOnly={true} status="available" />
+										<h5>Available</h5>
+									</div>
+									{!readMode && (
+										<div className={styles.seat}>
+											<Seat readOnly={true} status="selected" disabled={true} />
+											<h5>Selected</h5>
+										</div>
+									)}
+								</div>
+								<div className={styles.box2}>
+									<div className={styles.seat}>
+										<Seat readOnly={true} status="occupied" disabled={true} />
+										<h5>Occupied</h5>
+									</div>
+									<div className={styles.seat}>
+										<Seat
+											readOnly={true}
+											status="unavailable"
+											disabled={true}
+										/>
+										<h5>Unavailable</h5>
+									</div>
+								</div>
+							</>
+						)}
 					</div>
 					{!readMode && (
 						<button
