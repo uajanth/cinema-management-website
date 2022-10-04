@@ -1,11 +1,27 @@
 .drawer {
 	background-color: #0a0b0d;
 	color: white;
-	width: 20vw;
-	min-width: 320px;
+	width: 80vw;
 
-	h2 {
-		margin-left: 1rem;
+	.top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		h2 {
+			margin-left: 1rem;
+		}
+
+		button {
+			height: fit-content;
+			margin-right: 1rem;
+			background-color: #0a0b0d;
+			font-size: 0.5rem;
+			color: white;
+			padding: 0.5rem 0.7rem;
+			border: 1px white solid;
+			border-radius: 0.15rem;
+		}
 	}
 
 	.content {

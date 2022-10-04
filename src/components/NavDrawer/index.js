@@ -1,18 +1,29 @@
 import styles from "./NavDrawer.module.scss";
 import Drawer from "react-modern-drawer";
 import CinemasLocationCard from "../CinemasLocationCard";
+import { useMediaQuery } from "@react-hook/media-query";
 
 export default function NavDrawer({ drawer, onClose }) {
+	const isGreaterThan320px = useMediaQuery(
+		"only screen and (min-width: 320px)"
+	);
+
 	return (
 		<Drawer
 			open={drawer.state}
 			overlayOpacity="0.75"
 			onClose={() => onClose(drawer.type)}
-			style={{ backgroundColor: "#0a0b0d" }}
+			style={{
+				backgroundColor: "#0a0b0d",
+				width: isGreaterThan320px ? "320px" : "100vw",
+			}}
 			className={styles.drawer}
 			direction="right"
 		>
-			<h2>{drawer.type === "theatres" ? "Select a theatre" : "Search"}</h2>
+			<div className={styles.top}>
+				<h2>{drawer.type === "theatres" ? "Select a theatre" : "Search"}</h2>
+				<button onClick={() => onClose(drawer.type)}>X</button>
+			</div>
 			{drawer.type === "theatres" && (
 				<div className={styles.content}>
 					<CinemasLocationCard
@@ -30,9 +41,9 @@ export default function NavDrawer({ drawer, onClose }) {
 				<>
 					<div className={styles.content}>
 						<input className={styles.search} type="search" />
-						<div className={styles.box}>
+						{/* <div className={styles.box}>
 							<p>Coming Soon</p>
-						</div>
+						</div> */}
 					</div>
 				</>
 			)}
