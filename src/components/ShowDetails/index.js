@@ -31,6 +31,12 @@ export default function ShowDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles["box-1"]}>
+				<div className={styles.heading}>
+					<h2>{`${title} (${rating})`}</h2>
+					<LanguageTag language={language} />
+				</div>
+			</div>
+			<div className={styles["box-2"]}>
 				<div className={styles["col-1"]}>
 					<div className={styles.poster}>
 						{posterLink ? (
@@ -46,10 +52,6 @@ export default function ShowDetails({
 					</div>
 				</div>
 				<div className={styles["col-2"]}>
-					<div className={styles.heading}>
-						<h2>{`${title} (${rating})`}</h2>
-						<LanguageTag language={language} />
-					</div>
 					<div className={styles.date}>
 						<h5>Date</h5>
 						<h4>{format(new Date(date), "PPPP")}</h4>

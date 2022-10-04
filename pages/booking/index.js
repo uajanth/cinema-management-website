@@ -58,19 +58,25 @@ export default function Booking({ session, show, movie }) {
 			</Head>
 
 			<LogoBar />
-			<main className={styles.container}>
-				<div className={styles["link-container"]}>
-					<a
-						className={styles.link}
-						onClick={() => {
-							exitSessionHandler();
-						}}
-					>
-						Exit
-						<IoExitOutline className={styles.icon} />
-						<IoExit className={styles.icon2} />
-					</a>
-				</div>
+			<div className={styles["link-container"]}>
+				<a
+					className={styles.link}
+					onClick={() => {
+						exitSessionHandler();
+					}}
+				>
+					Exit
+					<IoExitOutline className={styles.icon} />
+					<IoExit className={styles.icon2} />
+				</a>
+			</div>
+			<main
+				className={styles.container}
+				style={{
+					justifyContent: session === false ? "flex-start" : "center",
+					backgroundColor: session !== false ? "white" : "black",
+				}}
+			>
 				{session && (
 					<div className={styles.content}>
 						<div className={styles["col-1"]}>
