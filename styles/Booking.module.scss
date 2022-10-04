@@ -70,8 +70,10 @@ $link-color: #007dd8;
 		color: #000;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-around;
-		align-items: stretch;
+		justify-content: center;
+		align-items: center;
+		overflow: scroll;
+		background-color: red;
 
 		.col-1 {
 			width: 100%;
@@ -96,7 +98,7 @@ $link-color: #007dd8;
 		.content {
 			.col-2 {
 				flex-direction: row;
-				align-items: flex-start;
+				align-items: center;
 			}
 		}
 	}

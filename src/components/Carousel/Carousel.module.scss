@@ -2,11 +2,11 @@
 
 .container {
 	width: base.$container-width;
+	min-width: base.$container-minWidth;
 	background-color: black;
 }
 
 .content {
-	// overflow: hidden;
 	position: relative;
 	max-width: calc(base.$container-maxWidth + 500px);
 	margin: auto;
