@@ -151,7 +151,7 @@ export default function OrderSummary({ session, onProceed, fee }) {
 					<p>{`$${total}`}</p>
 				</div>
 			</div>
-			<div>
+			<div className={styles.conditions}>
 				<input
 					type="checkbox"
 					id="terms"

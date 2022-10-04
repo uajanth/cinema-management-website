@@ -5,6 +5,7 @@
 	min-width: base.$container-minWidth;
 	display: flex;
 	flex-direction: column;
+	padding: 1rem;
 
 	h1 {
 		margin: 0;
@@ -64,6 +65,13 @@
 
 	.submit:hover {
 		cursor: pointer;
+	}
+
+	.conditions {
+		font-size: 0.5rem;
+		margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
 	}
 
 	.disabled {

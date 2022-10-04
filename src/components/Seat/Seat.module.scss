@@ -1,7 +1,8 @@
 .seat {
-	width: 20px;
-	height: 20px;
-	margin: 2px;
+	width: 14px;
+	height: 14px;
+	margin: 1.5px;
+	border-radius: 0.1rem;
 }
 
 .space {
@@ -30,4 +31,20 @@
 .unavailable {
 	fill: #000000;
 	cursor: not-allowed;
+}
+
+@media only screen and (min-width: 350px) {
+	.seat {
+		width: 16px;
+		height: 16px;
+		margin: 2px;
+		border-radius: 0.15rem;
+	}
+}
+
+@media only screen and (min-width: 420px) {
+	.seat {
+		width: 20px;
+		height: 20px;
+	}
 }

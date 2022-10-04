@@ -1,7 +1,7 @@
 @use "styles/base";
 
 .container {
-	width: 50%;
+	width: 100%;
 	min-width: base.$container-minWidth;
 	padding: 1rem;
 	display: flex;
@@ -33,7 +33,8 @@
 	}
 	.line-subheading {
 		margin: 0;
-		font-size: 0.8rem;
+		font-size: 0.5rem;
+		margin-bottom: 1rem;
 	}
 
 	.proceed {
@@ -56,8 +57,8 @@
 	}
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 960px) {
 	.container {
-		margin-top: -0.5rem;
+		width: 50%;
 	}
 }

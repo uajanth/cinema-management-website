@@ -1,14 +1,22 @@
-.main {
-	flex: 1;
+@use "base";
+
+.container {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	width: 500px;
+}
+.content {
+	width: 100%;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
 	.screen {
 		background-color: #d1d5db;
-		width: 85%;
+		width: 100%;
+		height: fit-content;
 		text-align: center;
 		letter-spacing: 4px;
 		font-size: 1rem;
@@ -18,27 +26,43 @@
 	}
 
 	.row {
+		width: 100%;
 		margin-bottom: 1rem;
 	}
 
 	.legend {
-		width: 500px;
-		height: 100px;
-		display: flex;
-		gap: 1rem;
-		justify-content: space-around;
+		width: 100%;
+		height: fit-content;
 		text-transform: uppercase;
-		letter-spacing: 0.1rem;
+		margin-bottom: 2rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+
+		.box1 {
+			width: 100%;
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		.box2 {
+			width: 100%;
+			display: flex;
+			gap: 0.5rem;
+		}
 
 		.seat {
+			width: 50%;
 			display: flex;
-			flex-direction: row;
 			justify-content: center;
 			align-items: center;
-			gap: 0.2rem;
 
 			h5 {
 				margin: 0;
+				font-size: 0.6rem;
 			}
 		}
 	}
@@ -60,5 +84,19 @@
 	.disabled {
 		background-color: #c3c3c3;
 		cursor: not-allowed !important;
+	}
+}
+
+@media only screen and (min-width: 420px) {
+	.content {
+		.legend {
+			flex-direction: row;
+		}
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.container {
+		width: 50%;
 	}
 }
