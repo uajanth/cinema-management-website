@@ -1,7 +1,7 @@
 @use "styles/base";
 
 .container {
-	width: 50%;
+	width: 0%;
 	min-width: base.$container-minWidth;
 	display: flex;
 	flex-direction: column;
@@ -80,8 +80,8 @@
 	}
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 960px) {
 	.container {
-		margin-top: -0.5rem;
+		width: 50%;
 	}
 }
