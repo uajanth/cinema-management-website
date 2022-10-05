@@ -47,7 +47,7 @@ export default function NavDrawer({ drawer, onClose }) {
 							city="Etobicoke"
 						/>
 						<CinemasLocationCard
-							name="Central Parkway Cinema"
+							name="Central Parkway Cinemas"
 							address="377 Burnhamthorpe Rd E, Mississauga, ON L5A 3Y1"
 							phone="(905) 277-2345"
 							city="Mississauga"
