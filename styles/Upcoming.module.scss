@@ -2,6 +2,7 @@
 
 .container {
 	width: base.$container-width;
+	min-width: base.$container-minWidth;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -9,24 +10,25 @@
 }
 
 .content {
-	color: white;
 	width: 100%;
-	min-width: base.$container-minWidth;
 	max-width: base.$container-maxWidth;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	min-width: base.$container-minWidth;
 
+	h1 {
+		padding: 0rem 1rem;
+		margin: 0;
+	}
 	.box {
-		border: 4px solid #0019d850;
-		background-color: #2e37e250;
-		width: 80%;
+		width: base.$container-width;
+		height: fit-content;
+		min-width: base.$container-minWidth;
+		max-width: base.$container-maxWidth;
 		padding: 1rem;
 
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		align-items: center;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 2rem;
 
 		h2,
 		p {
