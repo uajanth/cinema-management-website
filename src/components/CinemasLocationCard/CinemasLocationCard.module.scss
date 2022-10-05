@@ -1,27 +1,42 @@
 @use "./styles/base";
 
 .container {
-	color: #414141;
 	border: 2px solid #414141;
 	border-radius: 0.5rem;
 	padding: 1rem;
-	white-space: initial;
 
-	h4 {
-		font-size: minmax(1rem, calc(30vw * 0.04));
-		margin: 0;
-	}
+	.top {
+		margin-bottom: 1rem;
+		h4 {
+			font-size: 1rem;
+			margin: 0;
+			word-break: break-word;
+		}
 
-	h5 {
-		font-size: minmax(1rem, calc(30vw * 0.025));
-		margin: 0;
+		h5 {
+			font-size: 0.6rem;
+			margin: 0;
+		}
 	}
 
 	p {
+		font-size: 0.8rem;
 		margin: 0;
 	}
 }
 
-.container:hover {
+.selected {
+	color: #414141;
 	cursor: not-allowed;
+}
+
+.selectable {
+	color: white;
+	border-color: white;
+}
+
+.selectable:hover {
+	cursor: pointer;
+	color: #007dd8;
+	border-color: #007dd8;
 }

@@ -1,16 +1,26 @@
 import styles from "./CinemasLocationCard.module.scss";
-import { MdOutlineErrorOutline } from "react-icons/md";
 
-export default function CinemasLocationCard({ name, address, phone, city }) {
+export default function CinemasLocationCard({
+	isSelected,
+	name,
+	address,
+	phone,
+	city,
+}) {
+	const clickHandler = (event) => {
+		if (isSelected) {
+			return;
+		}
+		return alert(`This demo does not include ${name}!`);
+	};
 	return (
-		<div className={styles.container}>
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					marginBottom: "1rem",
-				}}
-			>
+		<div
+			onClick={clickHandler}
+			className={`${styles.container} ${
+				isSelected ? styles.selected : styles.selectable
+			}`}
+		>
+			<div className={styles.top}>
 				<h4>{name}</h4>
 				<h5>{city}</h5>
 			</div>
