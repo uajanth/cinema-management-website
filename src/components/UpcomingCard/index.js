@@ -14,22 +14,24 @@ export default function UpcomingMovieCard({ image, title, trailerLink }) {
 			</div>
 			<div className={styles.details}>
 				<h2 className={styles.title}>{title}</h2>
-				<div className={styles.trailer}>
-					<a
-						className={styles.link}
-						onClick={() => {
-							dispatch(
-								showModal({
-									type: "view-trailer",
-									info: { title, trailerLink },
-								})
-							);
-						}}
-					>
-						<IoPlayCircle fontSize="24" />
-						<h4>View Trailer</h4>
-					</a>
-				</div>
+				{!trailerLink.includes("undefined") && (
+					<div className={styles.trailer}>
+						<a
+							className={styles.link}
+							onClick={() => {
+								dispatch(
+									showModal({
+										type: "view-trailer",
+										info: { title, trailerLink },
+									})
+								);
+							}}
+						>
+							<IoPlayCircle fontSize="24" />
+							<h4>View Trailer</h4>
+						</a>
+					</div>
+				)}
 			</div>
 		</div>
 	);
