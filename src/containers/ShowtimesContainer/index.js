@@ -18,7 +18,7 @@ export default function ShowtimeContainer() {
 	const fetchShowsForDate = async (date) => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/shows/date/${date}`
+				`${process.env.NEXT_PUBLIC_BACKEND}/shows/date/${date}`
 			);
 			if (response.ok) {
 				const shows = await response.json();
@@ -56,7 +56,7 @@ export default function ShowtimeContainer() {
 		const id = ids.join();
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/movies/id/${id}`
+				`${process.env.NEXT_PUBLIC_BACKEND}/movies/id/${id}`
 			);
 			if (response.ok) {
 				const movies = await response.json();

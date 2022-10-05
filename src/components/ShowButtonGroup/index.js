@@ -19,7 +19,7 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 	const getShowDate = async () => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/shows/id/${showId}`,
+				`${process.env.NEXT_PUBLIC_BACKEND}/shows/id/${showId}`,
 				{
 					method: "GET",
 					headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 	const createNewSession = async (id) => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/sessions`,
+				`${process.env.NEXT_PUBLIC_BACKEND}/sessions`,
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },

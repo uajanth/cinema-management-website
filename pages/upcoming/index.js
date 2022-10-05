@@ -3,8 +3,9 @@ import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
 import "react-modern-drawer/dist/index.css";
+import UpcomingMovieCard from "../../src/components/UpcomingCard";
 
-export default function Upcoming() {
+export default function Upcoming({ movies }) {
 	return (
 		<div>
 			<Head>
@@ -19,11 +20,43 @@ export default function Upcoming() {
 			<NavMenu />
 			<main className={styles.container}>
 				<div className={styles.content}>
+					<h1>Upcoming Movies</h1>
 					<div className={styles.box}>
-						<h2>Coming Soon</h2>
+						{movies.map((movie, index) => (
+							<UpcomingMovieCard
+								key={index}
+								image={movie.posterLink}
+								title={movie.title}
+								trailerLink={movie.trailerLink}
+							/>
+						))}
 					</div>
 				</div>
 			</main>
 		</div>
 	);
+}
+
+export async function getServerSideProps(context) {
+	try {
+		const moviesResponse = await fetch(
+			`${process.env.NEXT_PUBLIC_BACKEND}/movies/upcoming`
+		);
+		if (moviesResponse.ok) {
+			const movies = await moviesResponse.json();
+			return {
+				props: {
+					movies,
+				},
+			};
+		}
+		throw new Error();
+	} catch (error) {
+		console.log(error);
+		return {
+			props: {
+				movies: [],
+			},
+		};
+	}
 }

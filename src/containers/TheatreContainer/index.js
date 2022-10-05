@@ -27,7 +27,7 @@ export default function TheatreContainer({
 	const fetchTheatreForShow = async (id) => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/shows/id/${id}/theatre`,
+				`${process.env.NEXT_PUBLIC_BACKEND}/shows/id/${id}/theatre`,
 				{
 					method: "GET",
 					headers: { "Content-Type": "application/json" },
@@ -60,7 +60,7 @@ export default function TheatreContainer({
 		if (Number(session.totalTickets) === seatsSelected.length) {
 			try {
 				const response = await fetch(
-					`https://gorgeous-blue-fedora.cyclic.app/sessions/id`,
+					`${process.env.NEXT_PUBLIC_BACKEND}/sessions/id`,
 					{
 						method: "PUT",
 						headers: { "Content-Type": "application/json" },

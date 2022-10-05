@@ -52,7 +52,7 @@ export default function OrderSummary({ session, onProceed, fee }) {
 	const updateSeat = async (id) => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/shows/seat`,
+				`${process.env.NEXT_PUBLIC_BACKEND}/shows/seat`,
 				{
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ export default function OrderSummary({ session, onProceed, fee }) {
 	const deleteSession = async (id) => {
 		try {
 			const response = await fetch(
-				`https://gorgeous-blue-fedora.cyclic.app/sessions/id/${id}`,
+				`${process.env.NEXT_PUBLIC_BACKEND}/sessions/id/${id}`,
 				{
 					method: "DELETE",
 					header: { "Content-Type": "application/json" },

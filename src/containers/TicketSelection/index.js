@@ -36,7 +36,7 @@ export default function TicketSelection({ session, onProceed, fee }) {
 			const jsonTicketsByGroup = JSON.stringify(state.ticketsByGroup);
 			try {
 				const response = await fetch(
-					`https://gorgeous-blue-fedora.cyclic.app/sessions/id`,
+					`${process.env.NEXT_PUBLIC_BACKEND}/sessions/id`,
 					{
 						method: "PUT",
 						headers: { "Content-Type": "application/json" },
