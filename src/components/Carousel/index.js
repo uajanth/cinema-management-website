@@ -13,27 +13,27 @@ export default function Carousel() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
-				{isGreaterThan500px ? (
-					<Image
-						src={banner}
-						alt="banner"
-						quality={100}
-						layout="fill"
-						objectFit="cover"
-						objectPosition="center"
-						priority
-					/>
-				) : (
-					<Image
-						src={smallBanner}
-						alt="banner"
-						quality={100}
-						layout="fill"
-						objectFit="cover"
-						objectPosition="center"
-						priority
-					/>
-				)}
+				<Image
+					src={banner}
+					alt="banner"
+					quality={100}
+					layout="fill"
+					objectFit="cover"
+					objectPosition="center"
+					priority
+					display="none"
+					style={{ opacity: isGreaterThan500px ? "100" : "0" }}
+				/>
+				<Image
+					src={smallBanner}
+					alt="banner"
+					quality={100}
+					layout="fill"
+					objectFit="cover"
+					objectPosition="center"
+					priority
+					style={{ opacity: isGreaterThan500px ? "0" : "100" }}
+				/>
 			</div>
 		</div>
 	);
