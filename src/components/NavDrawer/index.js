@@ -123,7 +123,9 @@ export default function NavDrawer({ drawer, onClose }) {
 						</div>
 						{search.state && (
 							<div className={styles.wrapper} style={{ gap: "0.4rem" }}>
-								<h4>{`Results ${search.results.length}`}</h4>
+								<h4
+									style={{ marginTop: "1rem" }}
+								>{`Results ${search.results.length}`}</h4>
 								{search.results.map((movie, index) => (
 									<p key={index} onClick={() => selectResultHandler(movie)}>
 										{movie.title}
