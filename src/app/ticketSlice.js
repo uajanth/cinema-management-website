@@ -58,13 +58,8 @@ export const ticketSlice = createSlice({
 			}
 		},
 		resetTickets: (state) => {
-			console.log(1, state.totalTickets);
-			console.log(1, state.ticketsByGroup);
-
 			state.totalTickets = initialState.totalTickets;
 			state.ticketsByGroup = initialState.ticketsByGroup;
-			console.log(2, state.totalTickets);
-			console.log(2, state.ticketsByGroup);
 		},
 	},
 });
