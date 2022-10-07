@@ -119,11 +119,7 @@ export default function NavDrawer({ drawer, onClose }) {
 								value={searchValue}
 								placeholder="Search for a movie"
 							/>
-							<IoSearch
-								className={styles.icon}
-								size="small"
-								onClick={searchHandler}
-							/>
+							<IoSearch className={styles.icon} onClick={searchHandler} />
 						</div>
 						{search.state && (
 							<div className={styles.wrapper} style={{ gap: "0.4rem" }}>
