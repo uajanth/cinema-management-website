@@ -1,0 +1,17 @@
+@use "base";
+
+.container {
+	width: base.$container-width;
+	min-width: base.$container-minWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	width: 100%;
+	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
+	color: black;
+}

@@ -20,6 +20,10 @@
 			object-fit: fill;
 			border: 2px solid rgb(67, 67, 67);
 		}
+
+		.image:hover {
+			cursor: pointer;
+		}
 	}
 	.details {
 		width: 100%;
@@ -36,6 +40,12 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+
+		.title:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+
 		.trailer {
 			color: base.$primary-color;
 			margin-bottom: 0.6rem;

@@ -1,0 +1,106 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	min-width: base.$container-minWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	width: 100%;
+	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
+	color: black;
+	background-color: white;
+	padding: 1rem;
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1rem;
+		align-items: flex-start;
+
+		h1 {
+			margin: 0;
+			margin-bottom: 1rem;
+		}
+
+		.hightlights {
+			display: flex;
+			flex-direction: column;
+			gap: 0.8rem;
+
+			.highlights-row {
+				display: flex;
+				gap: 0.8rem;
+
+				.highlight {
+					.highlight-title {
+						margin: 0;
+						text-transform: uppercase;
+						font-size: 0.8rem;
+					}
+
+					.highlight-body {
+						margin: 0;
+						font-size: 0.85rem;
+					}
+				}
+			}
+		}
+	}
+
+	.details {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.details-1 {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		.actions {
+			display: flex;
+			flex-direction: column;
+			gap: 0.1rem;
+			button {
+				border: none;
+				width: 100%;
+				padding: 0.5rem 1rem;
+			}
+			button:hover {
+				cursor: pointer;
+			}
+
+			.button1 {
+				background-color: base.$primary-color;
+				color: white;
+			}
+
+			.button1 {
+			}
+		}
+	}
+	.details-2 {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		.highlight {
+			.highlight-title {
+				margin: 0;
+				text-transform: uppercase;
+				font-size: 0.8rem;
+			}
+
+			.highlight-body {
+				margin: 0;
+				font-size: 0.85rem;
+			}
+		}
+	}
+}

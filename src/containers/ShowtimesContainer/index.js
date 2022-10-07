@@ -6,7 +6,7 @@ import ShowCard from "../../components/ShowCard";
 import { addDays, endOfDay, isPast } from "date-fns";
 import ErrorMessage from "../../components/ErrorMessage";
 
-export default function ShowtimeContainer() {
+export default function ShowtimeContainer({ movie }) {
 	const [shows, setShows] = useState([]);
 	const [movies, setMovies] = useState([]);
 	const [error, setError] = useState(false);
@@ -32,41 +32,54 @@ export default function ShowtimeContainer() {
 		}
 	};
 
-	const createUniqueMovieArray = async (movies) => {
-		const movieIdArray = [];
+	const createMovieArray = async (movies) => {
+		let movieIdArray = [];
+
 		for (let i = 0; i < movies.length; i++) {
 			if (!movieIdArray.includes(movies[i]._id)) {
 				movieIdArray.push(movies[i]._id);
 			}
 		}
+
+		// If movie prop exists
+		if (movie) {
+			if (movieIdArray.includes(movie._id)) {
+				return [movie._id];
+			}
+			return [];
+		}
+
 		return movieIdArray;
 	};
 
-	const filterShowsForUniqueMovies = async (shows) => {
+	const filterShowsForMovies = async (shows) => {
 		// Filter all shows for movies
 		const movies = [];
 		shows?.forEach((show) => movies.push(show.movie));
-		// Filter all movies for unique movies
-		const uniqueMoviesById = await createUniqueMovieArray(movies);
-		return uniqueMoviesById;
+		// Filter all movies for movies
+		const moviesById = await createMovieArray(movies);
+		return moviesById;
 	};
 
 	const fetchMoviesForDate = async (ids) => {
-		// Sanitize request input as a string
-		const id = ids.join();
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND}/movies/id/${id}`
-			);
-			if (response.ok) {
-				const movies = await response.json();
-				setMovies(movies);
-				return movies;
+		if (ids.length > 0) {
+			// Sanitize request input as a string
+			const id = ids.join();
+			try {
+				const response = await fetch(
+					`${process.env.NEXT_PUBLIC_BACKEND}/movies/id/${id}`
+				);
+				if (response.ok) {
+					const movies = await response.json();
+					setMovies(movies);
+					return movies;
+				}
+				throw new Error();
+			} catch (error) {
+				return;
 			}
-			throw new Error();
-		} catch (error) {
-			return;
 		}
+		return [];
 	};
 
 	const fetchShows = async (date) => {
@@ -78,15 +91,20 @@ export default function ShowtimeContainer() {
 			return "Invalid Date";
 		}
 		const shows = await fetchShowsForDate(date);
-		const uniqueMoviesById = await filterShowsForUniqueMovies(shows);
-		const movies = await fetchMoviesForDate(uniqueMoviesById);
+		const moviesById = await filterShowsForMovies(shows);
+		const movies = await fetchMoviesForDate(moviesById);
 		setMovies(movies);
+
+		if (movies.length === 0) {
+			setError(true);
+		}
+
 		return;
 	};
 
 	return (
 		<div className={styles.container}>
-			<Header text="Showtimes &amp; Tickets" color="#007DD8" />
+			<Header text="Showtimes" color="#007DD8" />
 			<DateContainer
 				date={async (date) => {
 					return await fetchShows(date);
@@ -106,6 +124,7 @@ export default function ShowtimeContainer() {
 						<ShowCard
 							key={index}
 							index={index}
+							id={movie._id}
 							title={movie.title}
 							language={movie.language}
 							cast={movie.cast}

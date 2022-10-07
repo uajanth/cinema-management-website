@@ -8,9 +8,11 @@ import ShowButtonGroup from "../ShowButtonGroup";
 import { IoPlayCircle } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../app/modalSlice";
+import { useRouter } from "next/router";
 
 export default function ShowCard({
 	index,
+	id,
 	title,
 	language,
 	cast,
@@ -28,6 +30,7 @@ export default function ShowCard({
 	}, [language]);
 
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const cardColor = index % 2 === 0 ? "#EFEFEF" : "#FAFAFA";
 
@@ -51,7 +54,12 @@ export default function ShowCard({
 	return (
 		<div className={styles.container} style={{ backgroundColor: cardColor }}>
 			<div className={styles["col-1"]}>
-				<div className={styles.poster}>
+				<div
+					className={styles.poster}
+					onClick={() => {
+						router.push(`/movie/${id}`);
+					}}
+				>
 					{posterLink ? (
 						<Image
 							src={posterLink}
@@ -66,7 +74,13 @@ export default function ShowCard({
 			</div>
 			<div className={styles["col-2"]}>
 				<div className={styles.heading}>
-					<h3>{title ? title : "Movie Title"}</h3>
+					<h3
+						onClick={() => {
+							router.push(`/movie/${id}`);
+						}}
+					>
+						{title ? title : "Movie Title"}
+					</h3>
 					<h4>{`${rating ? rating : "N/A"} | ${runtime ? runtime : "hrs"}`}</h4>
 				</div>
 				<div className={styles.cast}>
