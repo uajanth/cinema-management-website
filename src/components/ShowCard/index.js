@@ -28,7 +28,7 @@ export default function ShowCard({
 
 	useEffect(() => {
 		setShowLanguages(transformLanguage(language));
-	}, [language]);
+	}, [language, showtimes]);
 
 	const dispatch = useDispatch();
 	const router = useRouter();

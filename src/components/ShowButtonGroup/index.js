@@ -14,7 +14,7 @@ export default function ShowButtonGroup({ showId, title, time, disable }) {
 
 	useEffect(() => {
 		getShowDate();
-	}, []);
+	}, [showId]);
 
 	const getShowDate = async () => {
 		try {

@@ -3,17 +3,18 @@ import styles from "./ShowtimeContainer.module.scss";
 import Header from "../../components/Header";
 import DateContainer from "../DateContainer";
 import ShowCard from "../../components/ShowCard";
-import { addDays, endOfDay, isPast } from "date-fns";
+import { format, addDays, endOfDay, isPast, startOfToday } from "date-fns";
 import ErrorMessage from "../../components/ErrorMessage";
 
-export default function ShowtimeContainer({ movie, home }) {
+export default function ShowtimeContainer({ movie, home, date }) {
 	const [shows, setShows] = useState([]);
 	const [movies, setMovies] = useState([]);
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
 		setError(false);
-	}, []);
+		fetchShows(format(startOfToday(), "yyyy-MM-dd"));
+	}, [movie]);
 
 	const fetchShowsForDate = async (date) => {
 		try {
@@ -95,7 +96,7 @@ export default function ShowtimeContainer({ movie, home }) {
 		const movies = await fetchMoviesForDate(moviesById);
 		setMovies(movies);
 
-		if (movies.length === 0) {
+		if (movies?.length === 0) {
 			setError(true);
 		}
 
