@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { showModal } from "../../app/modalSlice";
 import Header from "../../components/Header";
 import Image from "next/image";
+import { IoPlayCircle, IoTicket } from "react-icons/io5";
 
 export default function MovieContainer({ movie }) {
 	const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export default function MovieContainer({ movie }) {
 								className={styles.button1}
 								style={{ cursor: "not-allowed" }}
 							>
+								<IoTicket fontSize="small" />
 								Buy Tickets
 							</button>
 							{!movie.trailerLink.includes("undefined") && (
@@ -70,6 +72,7 @@ export default function MovieContainer({ movie }) {
 										);
 									}}
 								>
+									<IoPlayCircle fontSize="medium" />
 									View Trailer
 								</button>
 							)}

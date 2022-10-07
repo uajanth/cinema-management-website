@@ -103,22 +103,24 @@ export default function ShowCard({
 				<div className={styles.director}>
 					<h5>{`Director:  ${director ? director : "Director"}`}</h5>
 				</div>
-				<div className={styles.trailer}>
-					<a
-						className={styles.link}
-						onClick={() => {
-							dispatch(
-								showModal({
-									type: "view-trailer",
-									info: { title, trailerLink },
-								})
-							);
-						}}
-					>
-						<IoPlayCircle fontSize="large" />
-						<h4>View Trailer</h4>
-					</a>
-				</div>
+				{home && (
+					<div className={styles.trailer}>
+						<a
+							className={styles.link}
+							onClick={() => {
+								dispatch(
+									showModal({
+										type: "view-trailer",
+										info: { title, trailerLink },
+									})
+								);
+							}}
+						>
+							<IoPlayCircle fontSize="large" />
+							<h4>View Trailer</h4>
+						</a>
+					</div>
+				)}
 				<div className={styles.languages}>
 					{showLanguages.length > 0 &&
 						showLanguages.map((language, index) => {

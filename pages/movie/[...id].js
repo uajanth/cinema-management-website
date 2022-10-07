@@ -32,7 +32,6 @@ export default function Movie({ movie }) {
 		body.style.overflow = "";
 	}
 
-	console.log(modalState);
 	const trailerModal =
 		isBrowser && modalState.type === "view-trailer"
 			? createPortal(
