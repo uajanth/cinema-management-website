@@ -87,7 +87,7 @@ export default function Home() {
 			<Carousel />
 			<main className={styles.container}>
 				<div className={styles.content}>
-					<ShowtimeContainer />
+					<ShowtimeContainer home={true} />
 				</div>
 			</main>
 		</div>

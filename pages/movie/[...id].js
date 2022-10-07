@@ -8,6 +8,7 @@ import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
 import ErrorMessage from "../../src/components/ErrorMessage";
 import "react-modern-drawer/dist/index.css";
+import TheatreContainer from "../../src/containers/TheatreContainer";
 import ShowtimeContainer from "../../src/containers/ShowtimesContainer";
 import MovieContainer from "../../src/containers/MovieContainer";
 
@@ -49,6 +50,18 @@ export default function Movie({ movie }) {
 			  )
 			: null;
 
+	const previewSeatsModal = isBrowser
+		? createPortal(
+				<Modal
+					header={`${modalState.info.title} - ${modalState.info.date} @ ${modalState.info.time}`}
+					color="#007DD8"
+				>
+					<TheatreContainer showId={modalState.info.showId} readMode={true} />
+				</Modal>,
+				document.getElementById("modal-root")
+		  )
+		: null;
+
 	return (
 		<div>
 			<Head>
@@ -64,6 +77,12 @@ export default function Movie({ movie }) {
 				modalState.isVisible &&
 				modalState.type === "view-trailer" &&
 				trailerModal}
+
+			{/* Preview Seats Modal */}
+			{isBrowser &&
+				modalState.isVisible &&
+				modalState.type === "preview-seats" &&
+				previewSeatsModal}
 
 			<LogoBar />
 			<NavMenu />

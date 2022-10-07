@@ -22,6 +22,7 @@ export default function ShowCard({
 	trailerLink,
 	posterLink,
 	showtimes,
+	home,
 }) {
 	const [showLanguages, setShowLanguages] = useState({});
 
@@ -56,9 +57,14 @@ export default function ShowCard({
 			<div className={styles["col-1"]}>
 				<div
 					className={styles.poster}
-					onClick={() => {
-						router.push(`/movie/${id}`);
-					}}
+					style={{ cursor: home ? "pointer" : "default" }}
+					onClick={
+						home === true
+							? () => {
+									router.push(`/movie/${id}`);
+							  }
+							: () => {}
+					}
 				>
 					{posterLink ? (
 						<Image
@@ -75,9 +81,17 @@ export default function ShowCard({
 			<div className={styles["col-2"]}>
 				<div className={styles.heading}>
 					<h3
-						onClick={() => {
-							router.push(`/movie/${id}`);
+						style={{
+							cursor: home ? "pointer" : "default",
+							textDecoration: home ? "" : "none",
 						}}
+						onClick={
+							home === true
+								? () => {
+										router.push(`/movie/${id}`);
+								  }
+								: () => {}
+						}
 					>
 						{title ? title : "Movie Title"}
 					</h3>
@@ -90,22 +104,20 @@ export default function ShowCard({
 					<h5>{`Director:  ${director ? director : "Director"}`}</h5>
 				</div>
 				<div className={styles.trailer}>
-					<Link href="/" passHref>
-						<a
-							className={styles.link}
-							onClick={() => {
-								dispatch(
-									showModal({
-										type: "view-trailer",
-										info: { title, trailerLink },
-									})
-								);
-							}}
-						>
-							<IoPlayCircle fontSize="large" />
-							<h4>View Trailer</h4>
-						</a>
-					</Link>
+					<a
+						className={styles.link}
+						onClick={() => {
+							dispatch(
+								showModal({
+									type: "view-trailer",
+									info: { title, trailerLink },
+								})
+							);
+						}}
+					>
+						<IoPlayCircle fontSize="large" />
+						<h4>View Trailer</h4>
+					</a>
 				</div>
 				<div className={styles.languages}>
 					{showLanguages.length > 0 &&

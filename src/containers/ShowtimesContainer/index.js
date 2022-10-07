@@ -6,7 +6,7 @@ import ShowCard from "../../components/ShowCard";
 import { addDays, endOfDay, isPast } from "date-fns";
 import ErrorMessage from "../../components/ErrorMessage";
 
-export default function ShowtimeContainer({ movie }) {
+export default function ShowtimeContainer({ movie, home }) {
 	const [shows, setShows] = useState([]);
 	const [movies, setMovies] = useState([]);
 	const [error, setError] = useState(false);
@@ -134,6 +134,7 @@ export default function ShowtimeContainer({ movie }) {
 							trailerLink={movie.trailerLink}
 							posterLink={movie.posterLink}
 							showtimes={shows.filter((show) => show.movie._id == movie._id)}
+							home={home}
 						/>
 					);
 				})}
