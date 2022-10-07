@@ -16,6 +16,10 @@
 			width: 135px;
 			height: 205px;
 		}
+
+		.poster:hover {
+			cursor: pointer;
+		}
 	}
 	.col-2 {
 		.heading {
@@ -28,6 +32,12 @@
 			h3 {
 				margin: 0;
 			}
+
+			h3:hover {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+
 			h4 {
 				font-weight: 500;
 				margin: 0;

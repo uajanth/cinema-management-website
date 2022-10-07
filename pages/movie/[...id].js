@@ -1,4 +1,4 @@
-import styles from "../../styles/Upcoming.module.scss";
+import styles from "../../styles/Movie.module.scss";
 import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -6,10 +6,12 @@ import Modal from "../../src/components/Modal";
 import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
+import ErrorMessage from "../../src/components/ErrorMessage";
 import "react-modern-drawer/dist/index.css";
-import UpcomingMovieCard from "../../src/components/UpcomingCard";
+import ShowtimeContainer from "../../src/containers/ShowtimesContainer";
+import MovieContainer from "../../src/containers/MovieContainer";
 
-export default function Upcoming({ movies }) {
+export default function Movie({ movie }) {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
 	const modalState = useSelector((state) => state.modal); // redux modalState
 
@@ -29,6 +31,7 @@ export default function Upcoming({ movies }) {
 		body.style.overflow = "";
 	}
 
+	console.log(modalState);
 	const trailerModal =
 		isBrowser && modalState.type === "view-trailer"
 			? createPortal(
@@ -66,18 +69,14 @@ export default function Upcoming({ movies }) {
 			<NavMenu />
 			<main className={styles.container}>
 				<div className={styles.content}>
-					<h1>Upcoming Movies</h1>
-					<div className={styles.box}>
-						{movies.map((movie, index) => (
-							<UpcomingMovieCard
-								key={index}
-								id={movie._id}
-								image={movie.posterLink}
-								title={movie.title}
-								trailerLink={movie.trailerLink}
-							/>
-						))}
-					</div>
+					{movie === undefined && (
+						<ErrorMessage
+							header="404 - This page could not be found"
+							message="Invalid Movie. It does not exist or may have been removed!"
+						/>
+					)}
+					{movie !== undefined && <MovieContainer movie={movie} />}
+					<ShowtimeContainer movie={movie} />
 				</div>
 			</main>
 		</div>
@@ -86,14 +85,14 @@ export default function Upcoming({ movies }) {
 
 export async function getServerSideProps(context) {
 	try {
-		const moviesResponse = await fetch(
-			`${process.env.NEXT_PUBLIC_BACKEND}/movies/upcoming`
+		const movieResponse = await fetch(
+			`${process.env.NEXT_PUBLIC_BACKEND}/movies/id/${context.query.id[0]}`
 		);
-		if (moviesResponse.ok) {
-			const movies = await moviesResponse.json();
+		if (movieResponse.ok) {
+			const movie = await movieResponse.json();
 			return {
 				props: {
-					movies,
+					movie: movie[0],
 				},
 			};
 		}
