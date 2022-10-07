@@ -18,31 +18,4 @@
 		padding: 0rem 1rem;
 		margin: 0;
 	}
-	.box {
-		width: base.$container-width;
-		height: fit-content;
-		min-width: base.$container-minWidth;
-		max-width: base.$container-maxWidth;
-		padding: 1rem;
-
-		display: flex;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		gap: 2rem;
-
-		h2,
-		p {
-			margin: 0;
-		}
-
-		h2 {
-			text-transform: uppercase;
-			font-size: 100%;
-		}
-
-		p {
-			font-size: 80%;
-			text-align: center;
-		}
-	}
 }

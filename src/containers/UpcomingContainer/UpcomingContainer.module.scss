@@ -1,0 +1,45 @@
+@use "styles/base";
+
+.container {
+	width: 100%;
+	min-width: base.$container-minWidth;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	width: 100%;
+	max-width: base.$container-maxWidth;
+	min-width: base.$container-minWidth;
+	color: black;
+	background-color: white;
+
+	.box {
+		width: base.$container-width;
+		height: fit-content;
+		min-width: base.$container-minWidth;
+		max-width: base.$container-maxWidth;
+		padding: 1rem;
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 2rem;
+
+		h2,
+		p {
+			margin: 0;
+		}
+
+		h2 {
+			text-transform: uppercase;
+			font-size: 100%;
+		}
+
+		p {
+			font-size: 80%;
+			text-align: center;
+		}
+	}
+}

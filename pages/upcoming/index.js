@@ -8,6 +8,7 @@ import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
 import "react-modern-drawer/dist/index.css";
 import UpcomingMovieCard from "../../src/components/UpcomingCard";
+import UpcomingContainer from "../../src/containers/UpcomingContainer";
 
 export default function Upcoming({ movies }) {
 	const [isBrowser, setIsBrowser] = useState(false); // required to access document
@@ -66,18 +67,7 @@ export default function Upcoming({ movies }) {
 			<NavMenu />
 			<main className={styles.container}>
 				<div className={styles.content}>
-					<h1>Upcoming Movies</h1>
-					<div className={styles.box}>
-						{movies.map((movie, index) => (
-							<UpcomingMovieCard
-								key={index}
-								id={movie._id}
-								image={movie.posterLink}
-								title={movie.title}
-								trailerLink={movie.trailerLink}
-							/>
-						))}
-					</div>
+					<UpcomingContainer movies={movies} />
 				</div>
 			</main>
 		</div>
