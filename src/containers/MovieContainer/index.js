@@ -4,6 +4,7 @@ import { showModal } from "../../app/modalSlice";
 import Header from "../../components/Header";
 import Image from "next/image";
 import { IoPlayCircle, IoTicket } from "react-icons/io5";
+import { format } from "date-fns";
 
 export default function MovieContainer({ movie }) {
 	const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function MovieContainer({ movie }) {
 							<div className={styles.highlight}>
 								<h5 className={styles["highlight-title"]}>Release Date</h5>
 								<p className={styles["highlight-body"]}>
-									{movie?.releaseDate ? movie?.releaseDate : "October 5, 2022"}
+									{format(new Date(movie?.releaseDate), "LLLL dd, yyyy")}
 								</p>
 							</div>
 							<div className={styles.highlight}>
@@ -88,11 +89,13 @@ export default function MovieContainer({ movie }) {
 							<p className={styles["highlight-body"]}>{movie?.director}</p>
 						</div>
 						<div className={styles.highlight}>
-							<h5 className={styles["highlight-title"]}>Summary</h5>
-							<p className={styles["highlight-body"]}>
-								{movie?.summary
-									? movie?.summary
-									: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+							{movie?.summary !== "NA" && (
+								<>
+									<h5 className={styles["highlight-title"]}>Summary</h5>
+									<p className={styles["highlight-body"]}>
+										{movie?.summary
+											? movie?.summary
+											: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud exercitation ullamco
 									laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -100,7 +103,9 @@ export default function MovieContainer({ movie }) {
 									dolore eu fugiat nulla pariatur. Excepteur sint occaecat
 									cupidatat non proident, sunt in culpa qui officia deserunt
 									mollit anim id est laborum.`}
-							</p>
+									</p>
+								</>
+							)}
 						</div>
 					</div>
 				</div>

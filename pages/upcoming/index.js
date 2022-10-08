@@ -7,7 +7,6 @@ import Head from "next/head";
 import LogoBar from "../../src/components/LogoBar";
 import NavMenu from "../../src/components/NavMenu";
 import "react-modern-drawer/dist/index.css";
-import UpcomingMovieCard from "../../src/components/UpcomingCard";
 import UpcomingContainer from "../../src/containers/UpcomingContainer";
 
 export default function Upcoming({ movies }) {
