@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import styles from "./ShowtimeContainer.module.scss";
 import Header from "../../components/Header";
-import DateContainer from "../DateContainer";
 import ShowCard from "../../components/ShowCard";
-import { format, addDays, endOfDay, isPast, startOfToday } from "date-fns";
+import DateContainer from "../DateContainer";
+import { addDays, endOfDay, isPast } from "date-fns";
 import ErrorMessage from "../../components/ErrorMessage";
+import Loader from "../../components/Loader";
 
-export default function ShowtimeContainer({ movie, home, date }) {
-	const [shows, setShows] = useState([]);
-	const [movies, setMovies] = useState([]);
-	const [error, setError] = useState(false);
+export default function ShowtimeContainer({ movie, home }) {
+	const [date, setDate] = useState("");
+	const [shows, setShows] = useState(null);
+	const [movies, setMovies] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		setError(false);
-		fetchShows(format(startOfToday(), "yyyy-MM-dd"));
-	}, [movie]);
+		fetchData(date);
+	}, [date]);
 
 	const fetchShowsForDate = async (date) => {
 		try {
@@ -23,31 +24,23 @@ export default function ShowtimeContainer({ movie, home, date }) {
 			);
 			if (response.ok) {
 				const shows = await response.json();
-				// Save shows as state
-				setShows(shows);
+				if (shows.length === 0) {
+					return [];
+				}
 				return shows;
 			}
 			throw new Error();
 		} catch (error) {
-			return;
+			return [];
 		}
 	};
 
 	const createMovieArray = async (movies) => {
-		let movieIdArray = [];
-
-		for (let i = 0; i < movies.length; i++) {
-			if (!movieIdArray.includes(movies[i]._id)) {
-				movieIdArray.push(movies[i]._id);
-			}
-		}
+		const movieIdArray = Array.from(new Set(movies?.map((movie) => movie._id)));
 
 		// If movie prop exists
 		if (movie) {
-			if (movieIdArray.includes(movie._id)) {
-				return [movie._id];
-			}
-			return [];
+			return [movie._id];
 		}
 
 		return movieIdArray;
@@ -55,8 +48,8 @@ export default function ShowtimeContainer({ movie, home, date }) {
 
 	const filterShowsForMovies = async (shows) => {
 		// Filter all shows for movies
-		const movies = [];
-		shows?.forEach((show) => movies.push(show.movie));
+		const movies = shows?.map((show) => show.movie);
+
 		// Filter all movies for movies
 		const moviesById = await createMovieArray(movies);
 		return moviesById;
@@ -72,73 +65,96 @@ export default function ShowtimeContainer({ movie, home, date }) {
 				);
 				if (response.ok) {
 					const movies = await response.json();
-					setMovies(movies);
+
+					if (movies.length === 0) {
+						return [];
+					}
+
 					return movies;
 				}
 				throw new Error();
 			} catch (error) {
-				return;
+				return [];
 			}
 		}
 		return [];
 	};
 
-	const fetchShows = async (date) => {
+	const fetchData = async (date) => {
+		setLoading(true);
 		// If the date has past then reset states of shows and movies and return an error
 		if (isPast(addDays(endOfDay(new Date(date)), 1))) {
-			setError(true);
 			setShows([]);
 			setMovies([]);
-			return "Invalid Date";
 		}
 		const shows = await fetchShowsForDate(date);
 		const moviesById = await filterShowsForMovies(shows);
 		const movies = await fetchMoviesForDate(moviesById);
+
+		setShows(shows);
 		setMovies(movies);
 
 		if (movies?.length === 0) {
-			setError(true);
+			setMovies([]);
 		}
+
+		//Temporary Solution to prevent error message from flashing
+		setTimeout(() => {
+			setLoading(false);
+		}, 100);
 
 		return;
 	};
 
-	return (
-		<div className={styles.container}>
-			<Header text="Showtimes" color="#007DD8" />
-			<DateContainer
-				date={async (date) => {
-					return await fetchShows(date);
-				}}
-			/>
-			{error && movies.length <= 0 && (
+	console.log(movies);
+	function Showings() {
+		if (loading) {
+			return <Loader color="#007DD8" loading={loading} />;
+		}
+
+		if (!loading && movies?.length <= 0) {
+			return (
 				<div style={{ margin: "1rem 0" }}>
 					<ErrorMessage
 						header="Sorry, no results were found"
 						message="No showtimes were found based on your selected date. Please choose an alternate date."
 					/>
 				</div>
-			)}
-			{movies?.length > 0 &&
-				movies.map((movie, index) => {
-					return (
-						<ShowCard
-							key={index}
-							index={index}
-							id={movie._id}
-							title={movie.title}
-							language={movie.language}
-							cast={movie.cast}
-							director={movie.director}
-							rating={movie.rating}
-							runtime={movie.runtimeStr}
-							trailerLink={movie.trailerLink}
-							posterLink={movie.posterLink}
-							showtimes={shows.filter((show) => show.movie._id == movie._id)}
-							home={home}
-						/>
-					);
-				})}
+			);
+		}
+
+		if (!loading && movies?.length > 0) {
+			return movies?.map((movie, index) => {
+				return (
+					<ShowCard
+						key={index}
+						index={index}
+						id={movie._id}
+						title={movie.title}
+						language={movie.language}
+						cast={movie.cast}
+						director={movie.director}
+						rating={movie.rating}
+						runtime={movie.runtimeStr}
+						trailerLink={movie.trailerLink}
+						posterLink={movie.posterLink}
+						showtimes={shows?.filter((show) => show.movie._id == movie._id)}
+						home={home}
+					/>
+				);
+			});
+		}
+	}
+
+	return (
+		<div className={styles.container}>
+			<Header text="Showtimes" color="#007DD8" />
+			<DateContainer
+				date={(date) => {
+					setDate(date);
+				}}
+			/>
+			<Showings />
 		</div>
 	);
 }

@@ -19,7 +19,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-modern-drawer": "^1.1.2",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-spinners": "^0.13.6"
   },
   "devDependencies": {
     "eslint": "8.20.0",
