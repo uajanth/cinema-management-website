@@ -1,8 +1,9 @@
 import styles from "./OrderSummary.module.scss";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { format } from "date-fns";
 
-export default function OrderSummary({ session, onProceed, fee }) {
+export default function OrderSummary({ session, fee, movie, show }) {
 	const [checked, setChecked] = useState(false);
 
 	const totalTickets = Number(session.totalTickets);
@@ -72,6 +73,34 @@ export default function OrderSummary({ session, onProceed, fee }) {
 		}
 	};
 
+	const sendEmailConfirmation = async () => {
+		try {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/sales`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					emailAddress: session?.email,
+					posterLink: movie?.posterLink,
+					movieTitle: movie?.title,
+					showDate: format(new Date(show?.date), "LLLL dd, yyyy"),
+					startTime: show?.startTime12,
+					theatre: show?.theatre?.theatre,
+					totalTickets: session?.totalTickets,
+					selectedSeats: session?.seatsSelected,
+				}),
+			});
+
+			if (response.ok) {
+				console.log("Email sent");
+				return;
+			}
+
+			throw new Error();
+		} catch (error) {
+			return;
+		}
+	};
+
 	const deleteSession = async (id) => {
 		try {
 			const response = await fetch(
@@ -99,6 +128,7 @@ export default function OrderSummary({ session, onProceed, fee }) {
 			for (let i = 0; i < transformSeats.length; i++) {
 				try {
 					await updateSeat(transformSeats[i]);
+					await sendEmailConfirmation();
 				} catch (error) {}
 			}
 

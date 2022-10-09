@@ -112,7 +112,12 @@ export default function Booking({ session, show, movie }) {
 								/>
 							)}
 							{session.checkoutStep == 3 && (
-								<OrderSummary session={session} fee={BOOKINGFEE} />
+								<OrderSummary
+									session={session}
+									fee={BOOKINGFEE}
+									movie={movie}
+									show={show}
+								/>
 							)}
 						</div>
 					</div>
