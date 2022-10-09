@@ -91,7 +91,8 @@ export default function OrderSummary({ session, fee, movie, show }) {
 			});
 
 			if (response.ok) {
-				console.log("Email sent");
+				const responseMessage = await response.json();
+				// console.log(responseMessage);
 				return;
 			}
 
