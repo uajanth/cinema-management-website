@@ -151,6 +151,10 @@ export default function OrderSummary({ session, onProceed, fee }) {
 					<p>{`$${total}`}</p>
 				</div>
 			</div>
+			<div className={styles.email}>
+				<p className={styles["email-label"]}>Email</p>
+				<p className={styles["email-value"]}>{session.email}</p>
+			</div>
 			<div className={styles.conditions}>
 				<input
 					type="checkbox"
