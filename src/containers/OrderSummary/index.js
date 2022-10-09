@@ -128,10 +128,10 @@ export default function OrderSummary({ session, fee, movie, show }) {
 			for (let i = 0; i < transformSeats.length; i++) {
 				try {
 					await updateSeat(transformSeats[i]);
-					await sendEmailConfirmation();
 				} catch (error) {}
 			}
 
+			await sendEmailConfirmation();
 			await deleteSession(sessionId);
 
 			router.replace("/");
