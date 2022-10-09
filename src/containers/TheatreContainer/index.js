@@ -66,6 +66,7 @@ export default function TheatreContainer({
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({
 							id: sessionId,
+							email: "false",
 							totalTickets: "false",
 							ticketsByGroup: "false",
 							seatsSelected: seatsSelected.join(", "),

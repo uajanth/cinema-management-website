@@ -37,6 +37,24 @@
 		margin-bottom: 1rem;
 	}
 
+	.email {
+		margin: 0.5rem 0 1rem 0;
+		display: flex;
+		align-items: center;
+		label {
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			font-weight: 600;
+			width: 15%;
+		}
+		input {
+			width: 85%;
+			font-size: 1rem;
+			border-radius: 0;
+			outline: none;
+		}
+	}
+
 	.proceed {
 		width: 100%;
 		background-color: #274eda;

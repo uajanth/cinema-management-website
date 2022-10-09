@@ -3,9 +3,11 @@ import TicketItem from "../../components/TicketItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { resetTickets } from "../../app/ticketSlice";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function TicketSelection({ session, onProceed, fee }) {
+	const [email, setEmail] = useState("");
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -31,8 +33,13 @@ export default function TicketSelection({ session, onProceed, fee }) {
 
 	const subtotal = (bookingSubtotal + ticketSubtotal).toFixed(2);
 
+	const emailChangeHandler = (event) => {
+		event.preventDefault();
+		setEmail(event.target.value);
+	};
+
 	const proceedHandler = async (state) => {
-		if (state.totalTickets > 0) {
+		if (state.totalTickets > 0 && email.includes("@") && email.includes(".")) {
 			const jsonTicketsByGroup = JSON.stringify(state.ticketsByGroup);
 			try {
 				const response = await fetch(
@@ -42,6 +49,7 @@ export default function TicketSelection({ session, onProceed, fee }) {
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({
 							id: sessionId,
+							email,
 							totalTickets,
 							ticketsByGroup: jsonTicketsByGroup,
 							seatsSelected: "false",
@@ -91,10 +99,14 @@ export default function TicketSelection({ session, onProceed, fee }) {
 					<p>{`$${subtotal}`}</p>
 				</div>
 			</div>
+			<div className={styles.email}>
+				<label>Email</label>
+				<input type="email" value={email} onChange={emailChangeHandler} />
+			</div>
 			<button
 				disabled={totalTickets == 0 ? true : false}
 				className={
-					totalTickets > 0
+					totalTickets > 0 && email.includes("@") && email.includes(".")
 						? `${styles.proceed}`
 						: `${styles.proceed} ${styles.disabled}`
 				}
