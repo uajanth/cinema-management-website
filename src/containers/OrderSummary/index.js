@@ -36,7 +36,7 @@ export default function OrderSummary({ session, fee, movie, show }) {
 	const total = (Number(subtotal) + Number(totalTaxes)).toFixed(2);
 
 	const orderBreakdown = JSON.stringify({
-		bookingFee: bookingSubtotal,
+		bookingFee: bookingSubtotal.toFixed(2),
 		subtotal: subtotal,
 		taxes: totalTaxes,
 		total: total,
