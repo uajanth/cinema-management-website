@@ -35,6 +35,13 @@ export default function OrderSummary({ session, fee, movie, show }) {
 	// Total
 	const total = (Number(subtotal) + Number(totalTaxes)).toFixed(2);
 
+	const orderBreakdown = JSON.stringify({
+		bookingFee: bookingSubtotal,
+		subtotal: subtotal,
+		taxes: totalTaxes,
+		total: total,
+	});
+
 	const handleTermsCheckbox = (event) => {
 		const termsCheckBox = document.getElementById("terms");
 
@@ -87,6 +94,8 @@ export default function OrderSummary({ session, fee, movie, show }) {
 					theatre: show?.theatre?.theatre,
 					totalTickets: session?.totalTickets,
 					selectedSeats: session?.seatsSelected,
+					ticketsByGroup: session?.ticketsByGroup,
+					orderBreakdown,
 				}),
 			});
 
