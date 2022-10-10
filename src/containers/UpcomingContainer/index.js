@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import UpcomingMovieCard from "../../components/UpcomingCard";
 import ErrorMessage from "../../components/ErrorMessage";
 export default function UpcomingContainer({ movies }) {
-	console.log(movies);
 	return (
 		<div className={styles.container}>
 			{movies === "No upcoming movies Found" && (
