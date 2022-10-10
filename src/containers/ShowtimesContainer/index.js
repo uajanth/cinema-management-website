@@ -91,8 +91,15 @@ export default function ShowtimeContainer({ movie, home }) {
 		const moviesById = await filterShowsForMovies(shows);
 		const movies = await fetchMoviesForDate(moviesById);
 
-		setShows(shows);
 		setMovies(movies);
+
+		if (home) {
+			setShows(shows);
+		}
+
+		if (!home) {
+			setShows(shows?.filter((show) => show?.movie?._id === moviesById[0]));
+		}
 
 		if (movies?.length === 0) {
 			setMovies([]);
@@ -106,13 +113,12 @@ export default function ShowtimeContainer({ movie, home }) {
 		return;
 	};
 
-	console.log(movies);
 	function Showings() {
 		if (loading) {
 			return <Loader color="#007DD8" loading={loading} />;
 		}
 
-		if (!loading && movies?.length <= 0) {
+		if (!loading && shows?.length <= 0) {
 			return (
 				<div style={{ margin: "1rem 0" }}>
 					<ErrorMessage
@@ -123,7 +129,7 @@ export default function ShowtimeContainer({ movie, home }) {
 			);
 		}
 
-		if (!loading && movies?.length > 0) {
+		if (!loading && shows?.length > 0) {
 			return movies?.map((movie, index) => {
 				return (
 					<ShowCard
