@@ -142,7 +142,7 @@ export default function CheckoutForm({ session, show, movie, orderDetails }) {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: "http://localhost:3001",
+				return_url: "/",
 			},
 			redirect: "if_required",
 		});

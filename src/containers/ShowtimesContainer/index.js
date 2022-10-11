@@ -81,35 +81,38 @@ export default function ShowtimeContainer({ movie, home }) {
 	};
 
 	const fetchData = async (date) => {
-		setLoading(true);
-		// If the date has past then reset states of shows and movies and return an error
-		if (isPast(addDays(endOfDay(new Date(date)), 1))) {
-			setShows([]);
-			setMovies([]);
+		if (date !== "") {
+			setLoading(true);
+			// If the date has past then reset states of shows and movies and return an error
+			if (isPast(addDays(endOfDay(new Date(date)), 1))) {
+				setShows([]);
+				setMovies([]);
+			}
+			const shows = await fetchShowsForDate(date);
+			const moviesById = await filterShowsForMovies(shows);
+			const movies = await fetchMoviesForDate(moviesById);
+
+			setMovies(movies);
+
+			if (home) {
+				setShows(shows);
+			}
+
+			if (!home) {
+				setShows(shows?.filter((show) => show?.movie?._id === moviesById[0]));
+			}
+
+			if (movies?.length === 0) {
+				setMovies([]);
+			}
+
+			//Temporary Solution to prevent error message from flashing
+			setTimeout(() => {
+				setLoading(false);
+			}, 100);
+
+			return;
 		}
-		const shows = await fetchShowsForDate(date);
-		const moviesById = await filterShowsForMovies(shows);
-		const movies = await fetchMoviesForDate(moviesById);
-
-		setMovies(movies);
-
-		if (home) {
-			setShows(shows);
-		}
-
-		if (!home) {
-			setShows(shows?.filter((show) => show?.movie?._id === moviesById[0]));
-		}
-
-		if (movies?.length === 0) {
-			setMovies([]);
-		}
-
-		//Temporary Solution to prevent error message from flashing
-		setTimeout(() => {
-			setLoading(false);
-		}, 100);
-
 		return;
 	};
 
