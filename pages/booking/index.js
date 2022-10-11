@@ -8,7 +8,6 @@ import ShowDetails from "../../src/components/ShowDetails";
 import TicketSelection from "../../src/containers/TicketSelection";
 import TheatreContainer from "../../src/containers/TheatreContainer";
 import OrderSummary from "../../src/containers/OrderSummary";
-import Link from "next/link";
 import ErrorMessage from "../../src/components/ErrorMessage";
 
 export default function Booking({ session, show, movie }) {
@@ -74,7 +73,7 @@ export default function Booking({ session, show, movie }) {
 				className={styles.container}
 				style={{
 					justifyContent: session === false ? "flex-start" : "center",
-					backgroundColor: session !== false ? "white" : "black",
+					backgroundColor: session !== false ? "white" : "",
 				}}
 			>
 				{session && (

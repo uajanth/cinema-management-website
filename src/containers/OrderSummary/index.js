@@ -1,15 +1,19 @@
 import styles from "./OrderSummary.module.scss";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { format } from "date-fns";
+import { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../../components/CheckoutForm";
+
+const stripePromise = loadStripe(
+	"pk_test_51LLVEnDd3VPVOXYVR69WhhUwCGU8S98vvO5GqdplJcGe0j5lI1oZL6uO0jGWLTi1R98a4K8bvWggTqDFaCZquXY300NU8poxkZ"
+);
 
 export default function OrderSummary({ session, fee, movie, show }) {
-	const [checked, setChecked] = useState(false);
+	const [clientSecret, setClientSecret] = useState("");
+	const router = useRouter();
 
 	const totalTickets = Number(session.totalTickets);
-
-	const router = useRouter();
-	const sessionId = router.query.sessionId;
 
 	const ticketsByGroup = JSON.parse(session.ticketsByGroup);
 	const purchasedGroups = ticketsByGroup.filter(
@@ -42,111 +46,34 @@ export default function OrderSummary({ session, fee, movie, show }) {
 		total: total,
 	});
 
-	const handleTermsCheckbox = (event) => {
-		const termsCheckBox = document.getElementById("terms");
+	useEffect(() => {
+		fetch(`${process.env.NEXT_PUBLIC_BACKEND}/purchase`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ items: [{ id: "xl-tshirt" }], total: total }),
+		})
+			.then((res) => res.json())
+			.then((data) => setClientSecret(data.clientSecret));
+	}, []);
 
-		const isChecked = termsCheckBox.getAttribute("checked");
-
-		if (isChecked === "true") {
-			termsCheckBox.removeAttribute("checked");
-			setChecked(false);
-			return;
-		}
-
-		termsCheckBox.setAttribute("checked", true);
-		setChecked(true);
+	const appearance = {
+		theme: "stripe",
 	};
-
-	const updateSeat = async (id) => {
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND}/shows/seat`,
-				{
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: session.showId,
-						seatId: id,
-					}),
-				}
-			);
-			if (response.ok) {
-				// console.log(`seat(${id}) updated!`);
-				return;
-			}
-			throw new Error();
-		} catch (error) {
-			return;
-		}
-	};
-
-	const sendEmailConfirmation = async () => {
-		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/sales`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					emailAddress: session?.email,
-					posterLink: movie?.posterLink,
-					movieTitle: movie?.title,
-					showDate: format(new Date(show?.date), "LLLL dd, yyyy"),
-					startTime: show?.startTime12,
-					theatre: show?.theatre?.theatre,
-					totalTickets: session?.totalTickets,
-					selectedSeats: session?.seatsSelected,
-					ticketsByGroup: session?.ticketsByGroup,
-					orderBreakdown,
-				}),
-			});
-
-			if (response.ok) {
-				const responseMessage = await response.json();
-				// console.log(responseMessage);
-				return;
-			}
-
-			throw new Error();
-		} catch (error) {
-			return;
-		}
-	};
-
-	const deleteSession = async (id) => {
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND}/sessions/id/${id}`,
-				{
-					method: "DELETE",
-					header: { "Content-Type": "application/json" },
-				}
-			);
-
-			if (response.ok) {
-				const data = await response.json();
-				return data;
-			}
-			throw new Error();
-		} catch (error) {
-			return;
-		}
+	const options = {
+		clientSecret,
+		appearance,
 	};
 
 	const submitHandler = async (seats) => {
-		if (checked) {
-			const transformSeats = seats.split(", ");
-
-			for (let i = 0; i < transformSeats.length; i++) {
-				try {
-					await updateSeat(transformSeats[i]);
-				} catch (error) {}
-			}
-
-			await sendEmailConfirmation();
-			await deleteSession(sessionId);
-
-			router.replace("/");
+		const transformSeats = seats.split(", ");
+		for (let i = 0; i < transformSeats.length; i++) {
+			try {
+				await updateSeat(transformSeats[i]);
+			} catch (error) {}
 		}
-
+		await sendEmailConfirmation();
+		await deleteSession(sessionId);
+		router.replace("/");
 		return;
 	};
 
@@ -196,27 +123,21 @@ export default function OrderSummary({ session, fee, movie, show }) {
 				<p className={styles["email-value"]}>{session.email}</p>
 			</div>
 			<div className={styles.conditions}>
-				<input
-					type="checkbox"
-					id="terms"
-					name="terms"
-					onChange={handleTermsCheckbox}
-					checked={checked && true}
-				/>
 				<label>
 					I have verfied the order details, and accept that all tickets are
 					final sale.
 				</label>
 			</div>
-			<button
-				disabled={totalTickets == 0 ? true : false}
-				className={
-					checked ? `${styles.submit}` : `${styles.submit} ${styles.disabled}`
-				}
-				onClick={() => submitHandler(session.seatsSelected)}
-			>
-				Submit
-			</button>
+			{clientSecret && (
+				<Elements options={options} stripe={stripePromise}>
+					<CheckoutForm
+						session={session}
+						show={show}
+						movie={movie}
+						orderDetails={orderBreakdown}
+					/>
+				</Elements>
+			)}
 		</div>
 	);
 }

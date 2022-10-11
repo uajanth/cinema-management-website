@@ -39,7 +39,7 @@ export default function TicketSelection({ session, onProceed, fee }) {
 	};
 
 	const proceedHandler = async (state) => {
-		if (state.totalTickets > 0 && email.includes("@") && email.includes(".")) {
+		if (state.totalTickets > 0 && /^\S+@\S+\.\S+$/.test(email)) {
 			const jsonTicketsByGroup = JSON.stringify(state.ticketsByGroup);
 			try {
 				const response = await fetch(
@@ -104,9 +104,11 @@ export default function TicketSelection({ session, onProceed, fee }) {
 				<input type="email" value={email} onChange={emailChangeHandler} />
 			</div>
 			<button
-				disabled={totalTickets == 0 ? true : false}
+				disabled={
+					totalTickets == 0 && !/^\S+@\S+\.\S+$/.test(email) ? true : false
+				}
 				className={
-					totalTickets > 0 && email.includes("@") && email.includes(".")
+					totalTickets > 0 && /^\S+@\S+\.\S+$/.test(email)
 						? `${styles.proceed}`
 						: `${styles.proceed} ${styles.disabled}`
 				}
