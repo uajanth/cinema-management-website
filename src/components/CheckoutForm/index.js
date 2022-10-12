@@ -18,6 +18,35 @@ export default function CheckoutForm({ session, show, movie, orderDetails }) {
 
 	const router = useRouter();
 
+	const fetchSeatAvailability = async (id) => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND}/shows/seat/${session.showId}/${id}`
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+				return data;
+			}
+			throw new Error();
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+	};
+
+	const allSeatsAvailable = async () => {
+		const transformSeats = session.seatsSelected.split(", ");
+
+		for (let i = 0; i < transformSeats.length; i++) {
+			const isAvailable = await fetchSeatAvailability(transformSeats[i]);
+			if (!isAvailable) {
+				return false;
+			}
+		}
+		return true;
+	};
+
 	const updateSeat = async (id) => {
 		try {
 			const response = await fetch(
@@ -127,62 +156,66 @@ export default function CheckoutForm({ session, show, movie, orderDetails }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// Check if the seats are still available
+		const seatAvailabilityCheck = await allSeatsAvailable();
 
-		// Process payment request through Stripe
-		if (!stripe || !elements) {
-			// Stripe.js has not yet loaded.
-			// Make sure to disable form submission until Stripe.js has loaded.
+		if (seatAvailabilityCheck) {
+			// Process payment request through Stripe
+			if (!stripe || !elements) {
+				// Stripe.js has not yet loaded.
+				// Make sure to disable form submission until Stripe.js has loaded.
+				return;
+			}
+
+			setIsLoading(true);
+
+			const payment = await stripe.confirmPayment({
+				elements,
+				confirmParams: {
+					// Make sure to change this to your payment completion page
+					return_url: "/",
+				},
+				redirect: "if_required",
+			});
+
+			// This point will only be reached if there is an immediate error when
+			// confirming the payment. Otherwise, your customer will be redirected to
+			// your `return_url`. For some payment methods like iDEAL, your customer will
+			// be redirected to an intermediate site first to authorize the payment, then
+			// redirected to the `return_url`.
+
+			if (payment.paymentIntent) {
+				setMessage("Success");
+			} else {
+				if (
+					payment.error.type === "card_error" ||
+					payment.error.type === "validation_error"
+				) {
+					setMessage(payment.error.message);
+				}
+			}
+
+			// Update status of seats in the database
+			const transformSeats = session.seatsSelected.split(", ");
+			for (let i = 0; i < transformSeats.length; i++) {
+				try {
+					await updateSeat(transformSeats[i]);
+				} catch (error) {}
+			}
+
+			// Send email
+			await sendEmailConfirmation();
+
+			// Delete session
+			await deleteSession(session._id);
+
+			await router.replace("/");
+
+			setIsLoading(false);
+
 			return;
 		}
 
-		setIsLoading(true);
-
-		const payment = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				// Make sure to change this to your payment completion page
-				return_url: "/",
-			},
-			redirect: "if_required",
-		});
-
-		// This point will only be reached if there is an immediate error when
-		// confirming the payment. Otherwise, your customer will be redirected to
-		// your `return_url`. For some payment methods like iDEAL, your customer will
-		// be redirected to an intermediate site first to authorize the payment, then
-		// redirected to the `return_url`.
-
-		if (payment.paymentIntent) {
-			setMessage("Success");
-		} else {
-			if (
-				payment.error.type === "card_error" ||
-				payment.error.type === "validation_error"
-			) {
-				setMessage(payment.error.message);
-			} else {
-				setMessage("An unexpected error occurred.");
-			}
-		}
-
-		// Change status of seats
-		const transformSeats = session.seatsSelected.split(", ");
-		for (let i = 0; i < transformSeats.length; i++) {
-			try {
-				await updateSeat(transformSeats[i]);
-			} catch (error) {}
-		}
-
-		// Send email
-		await sendEmailConfirmation();
-
-		// Delete session
-		await deleteSession(session._id);
-
-		await router.replace("/");
-
-		setIsLoading(false);
+		return alert("Seats are no longer available");
 	};
 
 	return (
