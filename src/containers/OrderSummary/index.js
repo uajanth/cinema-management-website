@@ -124,8 +124,9 @@ export default function OrderSummary({ session, fee, movie, show }) {
 			</div>
 			<div className={styles.conditions}>
 				<label>
-					I have verfied the order details, and accept that all tickets are
-					final sale.
+					By proceeding with the payment, you acknowledge that all the
+					information provided and the order details have been verified and that
+					you accept that all tickets are final sale (no refunds).
 				</label>
 			</div>
 			{clientSecret && (
