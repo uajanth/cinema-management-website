@@ -1,4 +1,5 @@
 import styles from "./OrderSummary.module.scss";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -119,7 +120,15 @@ export default function OrderSummary({ session, fee, movie, show }) {
 				</div>
 			</div>
 			<div className={styles.email}>
-				<p className={styles["email-label"]}>Email</p>
+				<p className={styles["email-label"]}>
+					Email
+					<div className={styles.tooltip}>
+						<IoMdInformationCircleOutline fontSize="medium" />
+						<span className={styles.tooltiptext}>
+							This will be the email address we send your order confirmation to
+						</span>
+					</div>
+				</p>
 				<p className={styles["email-value"]}>{session.email}</p>
 			</div>
 			<div className={styles.conditions}>
