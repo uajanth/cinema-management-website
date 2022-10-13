@@ -120,7 +120,7 @@ export default function NavDrawer({ drawer, onClose }) {
 								placeholder="Search for a movie"
 							/>
 							<div className={styles.icon}>
-								<IoSearch onClick={searchHandler} />
+								<IoSearch onClick={searchHandler} fontSize="30px" />
 							</div>
 						</div>
 						{search.state && (
