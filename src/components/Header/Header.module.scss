@@ -13,7 +13,25 @@
 		background-color: #181818;
 		color: white;
 		padding: 1rem;
-		border-top-right-radius: 0.4rem;
 		width: 100%;
+	}
+	.close {
+		padding: 0.5rem 1rem;
+		font-size: 1.25rem;
+		background-color: #181818;
+		color: white;
+		border-top-right-radius: 0.4rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		.x {
+			padding: 0.2rem 0.5rem;
+			font-weight: 700;
+		}
+
+		.x {
+			cursor: pointer;
+		}
 	}
 }

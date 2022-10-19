@@ -25,7 +25,12 @@ export default function Modal({ header, color, children }) {
 						event.stopPropagation();
 					}}
 				>
-					<Header text={header} color={color} />
+					<Header
+						text={header}
+						color={color}
+						isModal
+						onClose={() => dispatch(hideModal())}
+					/>
 
 					<div className={styles.content}>
 						{isGreaterThan320px ? (
