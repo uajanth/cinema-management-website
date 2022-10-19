@@ -219,19 +219,48 @@ export default function CheckoutForm({ session, show, movie, orderDetails }) {
 	};
 
 	return (
-		<form id="payment-form" onSubmit={handleSubmit}>
-			<PaymentElement id="payment-element" />
-			{message && <div className={styles.message}>{message}</div>}
-			<button
-				className={styles.button}
-				disabled={isLoading || !stripe || !elements}
-				id="submit"
-			>
-				<span id="button-text">
-					{isLoading ? <Loader loading color="#ffffff" size={20} /> : "Submit"}
-				</span>
-			</button>
-			{/* Show any error or success messages */}
-		</form>
+		<>
+			<div className={styles.test}>
+				<div className={styles.tag}>
+					<p>Test Mode</p>
+				</div>
+				<ol className={styles.instructions}>
+					<li>
+						Enter <span>&ldquo;4242 4242 4242 4242&ldquo;</span> for the card
+						number
+					</li>
+
+					<li>
+						Enter <span>&ldquo;12/26&ldquo;</span> for the expiration date
+					</li>
+
+					<li>
+						Enter <span>&ldquo;123&ldquo;</span> for the cvc
+					</li>
+
+					<li>
+						Enter <span>&ldquo;M1T 1L3&ldquo;</span> for the postal code
+					</li>
+				</ol>
+			</div>
+			<form id="payment-form" onSubmit={handleSubmit}>
+				<PaymentElement id="payment-element" />
+				{message && <div className={styles.message}>{message}</div>}
+				<button
+					className={styles.button}
+					disabled={isLoading || !stripe || !elements}
+					id="submit"
+				>
+					<span id="button-text">
+						{isLoading ? (
+							<Loader loading color="#ffffff" size={20} />
+						) : (
+							"Submit"
+						)}
+					</span>
+				</button>
+				{/* Show any error or success messages */}
+			</form>
+		</>
 	);
 }

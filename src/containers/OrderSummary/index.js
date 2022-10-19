@@ -125,7 +125,8 @@ export default function OrderSummary({ session, fee, movie, show }) {
 					<div className={styles.tooltip}>
 						<IoMdInformationCircleOutline fontSize="medium" />
 						<span className={styles.tooltiptext}>
-							This will be the email address we send your order confirmation to
+							This will be the email address where we send your order
+							confirmation
 						</span>
 					</div>
 				</p>

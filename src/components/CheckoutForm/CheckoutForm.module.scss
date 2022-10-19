@@ -1,3 +1,38 @@
+.test {
+	.tag {
+		width: 100%;
+		background-color: #f4fb6f;
+		font-weight: 700;
+		color: #6d6d0d;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.2rem 0.2rem 0 0;
+		display: inline-block;
+
+		p {
+			margin: 0;
+			font-size: 0.6rem;
+			text-transform: uppercase;
+		}
+	}
+
+	.instructions {
+		background-color: #f0f0f0;
+		color: #676767;
+		padding: 1rem;
+		margin: 0;
+		margin-bottom: 1rem;
+		border-radius: 0 0 0.75rem 0.75rem;
+		list-style-position: inside;
+
+		li {
+			margin-bottom: 0.5rem;
+			span {
+				font-weight: 500;
+			}
+		}
+	}
+}
+
 .message {
 	margin-top: 2rem;
 	font-size: 0.75rem;
