@@ -16,6 +16,7 @@ The e-commerce website's frontend is deployed using Vercel, and the backend for 
 - [x] Send confirmation email upon successful purchase using SendGrid
     
 #### Planned
+- [ ] Allow users to go back to different steps in the checkout flow
 - [ ] Prevent purchasing the same seats at the same time
 - [ ] Improve sessions for purchasing tickets
 
