@@ -1,4 +1,4 @@
-# Cinema Management System
+# Cinema Management Website
 
 <sup><sub>Note: The demo may be unpredictably buggy at times, given that it is hosted on platforms using the free-tiers.</sub></sup>
 
